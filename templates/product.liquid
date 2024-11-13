@@ -19,7 +19,7 @@
   
 </style>
 
-<script>
+<script type="load">
   
   $(document).ready(function() {
     $('.img-side').click(function() {
@@ -81,7 +81,7 @@
                 <div class="item-box">
                     <a href="#" id="lbimg" class="lightbox-item w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
                       {% for image in product.images limit:1 %}
-                          <img id="img1" src="{{ image | img_url: 'x1000' }}" loading="lazy" alt="" class="img-itemtop" />
+                          <img id="img1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="{{ image | img_url: 'x1000' }}" ds-src="{{ image | img_url: 'x360' }}" loading="lazy" alt="" class="img-itemtop" />
                       {% endfor %}
                       <script type="application/json" class="w-json">
                             {
@@ -109,7 +109,7 @@
                 <div class="div-block-3">
                   {% if product.images.size > 0 %}
                       {% for image in product.images %}
-                        <img src="{{ image | img_url: 'x800' }}" loading="lazy" alt="" class="img-side" />
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="{{ image | img_url: 'x1000' }}" ds-src="{{ image | img_url: 'x360' }}" loading="lazy" alt="" class="img-side" />
                       {% endfor %}
                     {% endif %}
                 </div>
@@ -255,7 +255,7 @@
 {% include 'related' %}
 {% include 'sect-cta' %}
 
-<script>
+<script type="load">
   
 var selectCallback = function(variant, selector) {
 

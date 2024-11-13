@@ -15,7 +15,7 @@
     <div class="mask w-slider-mask" id="w-slider-mask-2">
       {% paginate collections.all.products by 1000 %}
         {% for collection in collections %}
-          {% for product in collection.products %}
+          {%- for product in collection.products -%}
             {% if product.tags contains 'feat' limit:1 %}
               <div class="slide w-slide" role="group" style="padding-top:35px">
                 <div class="row"><div class="hero-line ctr">Save Today!</div></div>
@@ -29,7 +29,7 @@
                   </div>
               </div>
             {% endif %}
-          {% endfor %}
+          {%- endfor -%}
         {% endfor %}
       {% endpaginate %}      
       <div aria-live="off" aria-atomic="true" class="w-slider-aria-label" data-wf-ignore=""></div>

@@ -3,89 +3,88 @@
 <!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->  
+<!--[if (gt IE 9)|!(IE)]><!--> 
+<html class="no-js"> <!--<![endif]-->  
 <head>
+{% render 'head-content' %}
+	<meta charset="utf-8" />
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
+	<title>
+	{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+	</title>
+
+	{% if page_description %}
+	<meta name="description" content="{{ page_description | escape }}" />
+	{% endif %}
+
+	<link rel="canonical" href="{{ canonical_url }}" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	{{ 'styles.css' | asset_url | preload_tag: as: 'style' }}
+	{% include 'open-graph-tags' %}
+	{% include 'twitter-card' %}
+
+	{%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
+		{{ content_for_header }}
+	{%- else -%}
+		{% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
+		{{ content_for_header2 | replace: ' async="async" ', ' type="load" ' | replace: ' defer="defer" ', ' type="load" ' | replace: " src=", " d-src="| replace: "DOMContentLoaded", "xDOMContentLoaded" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('xDOMContentLoaded', asyncLoad, false);" | replace: "addEventListener('load', prefetchAssets);", "addEventListener('xDOMContentLoaded', prefetchAssets);" | replace: "type='text/javascript' async=''", "type='load' " | replace: 'type="module" d-', 'dxt="module" type="load" d-' }}
+		<script>var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;</script>
+	{%- endif -%}
+	
+	{{ 'normalize.css' | asset_url | stylesheet_tag }}
+	{{ 'components.css' | asset_url | stylesheet_tag }}
+	{{ 'styles.css' | asset_url | stylesheet_tag }}
+    {{ 'shopify-styles.css' | asset_url | stylesheet_tag }}
+	
+	<script type="load" d-src="https://d1tdp7z6w94jbb.cloudfront.net/js/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+	
+	
+    <script type="load" d-src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+	{% if template contains 'customers' %}  
+	{{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+	{% endif %}
+	
+	<!-- Additional Shopify helpers that will likely be added to the global shopify_common.js some day soon. -->
   
-  <meta charset="utf-8" />
-  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
+	
+	<script type="load" d-src="{{ 'shopify_common.js'  | asset_url }}"></script>
+    <script d-src="{{ 'option_selection.js' | shopify_asset_url }}" type="load"></script>
+    <script d-src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="load"></script>
+	<script type="load">jQuery('html').removeClass('no-js').addClass('js');</script>
+	
+	{{ 'headstyles.css' | asset_url | stylesheet_tag }}
+    <script type="load" d-src="{{ 'headscripts.js' | asset_url }}"></script>
+	
+	
+	<link href="https://cdn.shopify.com/s/files/1/0114/3196/8868/files/fav-1.png?v=1649796751" rel="shortcut icon" type="image/x-icon">
+	<link href="https://cdn.shopify.com/s/files/1/0114/3196/8868/files/mobi.jpg?v=1710468555" rel="apple-touch-icon">
+	
+	<script d-src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="load"></script>
+	<script type="load">WebFont.load({  google: {    families: ["Prata:regular","Henny Penny:regular"]  }});</script>
 
-  <title>
-  {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
-  </title>
+	<!-- Google tag (gtag.js) -->
+	<script type="load" d-src="https://www.googletagmanager.com/gtag/js?id=G-F645484GVX"></script>
+	<script type="load">
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	
+	gtag('config', 'G-F645484GVX');
+	</script>
+	{% render 'gtm' %}
+	<!-- Google Tag Manager -->
+	<script type="load">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NNWJW7P');</script>
+	<!-- End Google Tag Manager -->
 
-  {% if page_description %}
-    <meta name="description" content="{{ page_description | escape }}" />
-  {% endif %}
-
-  <link rel="canonical" href="{{ canonical_url }}" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  {{ 'styles.css' | asset_url | preload_tag: as: 'style' }}
-  {% include 'open-graph-tags' %}
-  {% include 'twitter-card' %}
-
-  <!-- BEGIN app block: shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507 -->
-  <script type="lazyload2" data-src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=RT5LAT"></script>
-  <script type="lazyload2">!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();</script>
-
-  <!-- END app app block --> 
-  {% comment %}{{ content_for_header }}{% endcomment %}
-  {{ content_for_header | replace : ' href=', ' data-href=' | replace : "addEventListener('load'", "addEventListener('wnw_load'" | replace : "document.addEventListener('DOMContentLoaded", "document.addEventListener('DOMContentLoaded2" | replace : 'defer="defer" src=', 'type="lazyload2" defer="defer" data-src=' }}
-
-  <script>var trekkie=[];trekkie.integrations=!0;</script>
-  
-  {{ 'normalize.css' | asset_url | stylesheet_tag }}
-  {{ 'components.css' | asset_url | stylesheet_tag }}
-  {{ 'styles.css' | asset_url | stylesheet_tag }}
-  {{ 'shopify-styles.css' | asset_url | stylesheet_tag }}
-  
-  <script data-src="https://d1tdp7z6w94jbb.cloudfront.net/js/jquery-3.3.1.min.js"  type="lazyload2" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
-  <!--[if lt IE 9]>
-  {{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
-  <![endif]-->
-  
-  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
-  {% if template contains 'customers' %}  
-    {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
-  {% endif %}
-  
-  <!-- Additional Shopify helpers that will likely be added to the global shopify_common.js some day soon. -->
-  {{ 'shopify_common.js'  | asset_url | script_tag }}
-  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
-
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
-  <script>jQuery('html').removeClass('no-js').addClass('js');</script>
-  
-  {{ 'headstyles.css' | asset_url | stylesheet_tag }}
-  {{ 'headscripts.js' | asset_url | script_tag }}
-    
-  <link href="https://cdn.shopify.com/s/files/1/0114/3196/8868/files/fav-1.png?v=1649796751" rel="shortcut icon" type="image/x-icon">
-  <link href="https://cdn.shopify.com/s/files/1/0114/3196/8868/files/mobi.jpg?v=1710468555" rel="apple-touch-icon">
-  
-  <script data-src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="lazyload2"></script>
-  <script type="lazyload2">WebFont.load({  google: {    families: ["Prata:regular","Henny Penny:regular"]  }});</script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async type="lazyload2" data-src="https://www.googletagmanager.com/gtag/js?id=G-F645484GVX"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  
-  gtag('config', 'G-F645484GVX');
-  </script>
-  {% render 'gtm' %}
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-NNWJW7P');</script>
-  <!-- End Google Tag Manager -->
-
-  <meta name="google-site-verification" content="2xKf-05XSVFS-JVB_9CxOCGhUMF20BWOE2vFEBTl5TE" />
-  
+	<meta name="google-site-verification" content="2xKf-05XSVFS-JVB_9CxOCGhUMF20BWOE2vFEBTl5TE" />
+	{% render 'app-block' %}
+	{% render 'custom-css' %}
 </head>
 
 
@@ -94,39 +93,40 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NNWJW7P"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-  {% include 'navi' %}
+	{% include 'navi' %}
 
-  {% if template.name != "product" %} 
-  <div class="topspace"></div>
-  {% endif %}
-  
-  {% comment %}
-    IE8 and IE9 don't support the HTML5 placeholder attribute, so it's a good idea to use JavaScript
-    to show and hide the placeholder text.
-    Have a look in assets/shop.js.liquid to see sample JavaScript for this.
-  {% endcomment %}
+	{% if template.name != "product" %} 
+	<div class="topspace"></div>
+	{% endif %}
+	
+	{% comment %}
+	IE8 and IE9 don't support the HTML5 placeholder attribute, so it's a good idea to use JavaScript
+	to show and hide the placeholder text.
+	Have a look in assets/shop.js.liquid to see sample JavaScript for this.
+	{% endcomment %}
 
-  <main role="main">
-    {{ content_for_layout }}
-  </main>
-  
-  {% section 'footer' %}
+	<main role="main">
+	{%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
+      {{ content_for_layout }}
+    {%- else -%}
+      {% capture content_for_layout2 %}{{ content_for_layout }}{% endcapture %}
+      {{ content_for_layout2 | replace: '<img src="https', '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="https' | replace: '<img src="//', '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="//' }}
+    {%- endif -%}	
+	</main>
+	
+	{% section 'footer' %}
+    <script type="load" d-src="{{ 'js-scripts.js'  | asset_url }}"></script>
+    <script type="load" d-src="{{ 'shop.js'  | asset_url }}"></script>
 
-  {{ 'js-scripts.js'  | asset_url | script_tag }}
-  
-  {{ 'shop.js'  | asset_url | script_tag }}
-  
+	<!-- **BEGIN** Hextom FSB Integration // Main Include - DO NOT MODIFY -->
+	{% render 'hextom_fsb_main', product: product, customer: customer %}
+	<!-- **END** Hextom FSB Integration // Main Include - DO NOT MODIFY -->
 
-<!-- **BEGIN** Hextom FSB Integration // Main Include - DO NOT MODIFY -->
-    {% render 'hextom_fsb_main', product: product, customer: customer %}
-    <!-- **END** Hextom FSB Integration // Main Include - DO NOT MODIFY -->
+	<!-- **BEGIN** Hextom QAB Integration // Main Include - DO NOT MODIFY -->
+	{% render 'hextom_qab_main', product: product, customer: customer %}
+	<!-- **END** Hextom QAB Integration // Main Include - DO NOT MODIFY -->
 
-<!-- **BEGIN** Hextom QAB Integration // Main Include - DO NOT MODIFY -->
-    {% render 'hextom_qab_main', product: product, customer: customer %}
-    <!-- **END** Hextom QAB Integration // Main Include - DO NOT MODIFY -->
- 
-  
-  {% render 'optimizer' %}
+	{% render 'footer-app-block' %}
+	{% render 'foot-content' %}
 </body>
-
 </html>

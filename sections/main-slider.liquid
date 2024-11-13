@@ -54,8 +54,8 @@
       		<div class="w-slide aaaaa" role="group" aria-hidden="true" style="transform: translateX(0px); opacity: 1;">
               <a href="{{ block.settings.imurl }}">
               <picture>
-                <source media="(max-width:479px)" srcset="{{ block.settings.image | img_url : '600x' }}">
-                <img src="{{ block.settings.image | img_url : '1200x' }}" class="img" width={{ block.settings.image.width }} height="{{ block.settings.image.height }}" 
+                <source media="(max-width:479px)" data-srcset="{{ block.settings.image | img_url : '600x' }}">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="{{ block.settings.image | img_url : '1200x' }}" ds-src="{{ block.settings.image | img_url : '580x' }}" class="img" width={{ block.settings.image.width }} height="{{ block.settings.image.height }}" 
                   {% if forloop.index == 1 %}loading="eager" {% else %}loading="lazy"{% endif %} >
               </picture>                          
               </a>

@@ -1,0 +1,53 @@
+<div id="shopify-block-15683396631634586217" class="shopify-block shopify-app-block"><script
+  id="chat-button-container"
+  data-horizontal-position=bottom_left
+  data-vertical-position=lowest
+  data-icon=chat_bubble
+  data-text=chat_with_us
+  data-color=#0d0e30
+  data-secondary-color=#ffffff
+  data-ternary-color=#6a6a6a
+  
+    data-greeting-message=Chat+with+us+if+you+have+questions+or+would+like+more+information+about+a+product%21%0A%0AWe+will+respond+as+promptly+as+possible+during+normal+business+hours+%28Mon.+-+Fri.+10-5%3A30pm+%26+Sat.+9-3pm+EDT%29+-+however+for+the+fastest+response%2C+please+call+us+at+716-652-2811.++Messages+after+business+hours+will+be+responded+to+as+soon+as+possible%2C+or+the+following+morning.
+  
+  data-domain=www.aurorasewingcenter.com
+  data-external-identifier=ZWmbX71I8c0IqC7u_T3fHhEyfBuk9ynG9e3q7M7SzoQ
+>
+</script>
+
+
+</div>
+<div id="shopify-block-12654720250257946533" class="shopify-block shopify-app-block"><div class="bta-app-embed-block">
+</div>
+
+<script>
+  window.BtaAppEmbedConfig = {
+    account: 'aurorasewingcenter',
+    settings: JSON.parse('{{ shop.metafields.bookthatapp.config.value }}' || '{}'),
+    cart: {{ cart | json }},
+    blockSetting: {"widget_type_1":"none","widget_position_1":"bottom_right","widget_type_2":"none","widget_position_2":"bottom_left","rich_snippets":"disabled"},
+    {% if template contains 'product' %}'product': {{ product.id }},{% endif %}
+    version: '1.4'
+  }
+
+  if (window.BtaConfig) {
+    // prevent rendering of Upcoming Event widget with mode 'popup' (BtaWidgetLoader shouldn't render it)
+    window.BtaConfig.skipUpcomingEventPopup = true;
+  }
+</script>
+
+
+</div>
+
+<script>
+    var site_nav_link_burger = true;
+    document.addEventListener("DOMContentLoaded", function() {
+        var icon_menu = document.querySelector('.menu.w-nav-button');
+        icon_menu.addEventListener("click", function() {
+            if(site_nav_link_burger && !document.documentElement.classList.contains('scld')) {
+                event.preventDefault();
+                site_nav_link_burger = false;
+            }
+        });
+    }) 
+</script>

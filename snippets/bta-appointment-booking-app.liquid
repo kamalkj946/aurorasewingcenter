@@ -1,0 +1,22 @@
+<!-- BEGIN app block: shopify://apps/bta-appointment-booking-app/blocks/widgets/447b4be3-b8e8-4347-959f-d9a05d4b2d5d -->
+<script>var bondVariantIds = [], productConfig = {}, productMetafields;productMetafields = '{% if template contains 'product' %}{{ product.metafields.bookthatapp.json_config.value | json }}{% endif %}';
+
+        if (productMetafields !== '') {
+            productConfig = JSON.parse(productMetafields);
+        }
+
+    window.BtaConfig = {
+        account: 'aurorasewingcenter',
+        bondVariantIds: bondVariantIds,
+        cart: `{{ cart | json }}`,
+        customer: '{{ customer.id }}',product: productConfig,settings: JSON.parse('{{ shop.metafields.bookthatapp.config.value }}' || '{}'),
+        version: '1.6'
+    }
+</script>
+
+
+
+<script type="load" d-src="//aurorasewingcenter.myshopify.com/apps/bookthatapp/sdk/v1/js/bta-widgets-bootstrap.min.js"></script>
+
+
+<!-- END app app block -->
