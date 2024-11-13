@@ -1,0 +1,10 @@
+<li class="li-blog">
+  <a href="{{ article.url }}" class="blog-list w-inline-block">
+    <div class="go-blog" style="background-image:url({{ article | img_url: 'large' }})">
+      <img src="https://cdn.shopify.com/s/files/1/0238/9239/4048/files/widesc.jpeg?1658324525666448336" alt="" class="img-sp">
+    </div>
+    <h3 class="h3-blog">{{ article.title }}</h3>
+    <p class="bot25">{{ article.content | strip_html | truncatewords: 20 }}</p>
+    <a href="{{ article.url }}" class="btn btn-blog w-button">Read More</a>
+  </a>
+</li>

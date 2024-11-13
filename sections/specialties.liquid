@@ -1,0 +1,86 @@
+{% schema %}
+  {
+    "name": "Specialties",
+    "settings": [
+    {
+      "type": "text",
+      "id": "topheading",
+      "label": "Heading",
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "btntxt",
+      "label": "Button Text",
+      "default": "text"
+    },
+
+    {
+      "type": "text",
+      "id": "btn1txt",
+      "label": "Block 1 Text",
+      "default": "text"
+    },
+    {
+      "type": "url",
+      "id": "collec1",
+      "label": "Block 1 URL"
+    },
+
+    {
+      "type": "text",
+      "id": "btn2txt",
+      "label": "Block 2 Text",
+      "default": "text"
+    },
+    {
+      "type": "url",
+      "id": "collec2",
+      "label": "Block 2 URL"
+    },
+
+    {
+      "type": "text",
+      "id": "btn3txt",
+      "label": "Block 3 Text",
+      "default": "text"
+    },
+    {
+      "type": "url",
+      "id": "collec3",
+      "label": "Block 3 URL"
+    }
+
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<div class="wide w-container">
+  <h2 class="bot50">{{ section.settings.topheading }}</h2>
+  <ul role="list" class="ul-cllc">
+    <li class="li-item li-feats">
+      <a href="{{ section.settings.collec1 }}" class="cllc-go w-inline-block">
+        <div class="padded"><h3 class="h3-item">{{ section.settings.btn1txt }}</h3></div>
+        <div class="row"><div class="btn btn-link darklink btn-more">{{ section.settings.btntxt }}</div></div>
+      </a>
+    </li>
+    <li class="li-item li-feats">
+      <a href="{{ section.settings.collec2 }}" class="cllc-go w-inline-block">
+        <div class="padded"><h3 class="h3-item">{{ section.settings.btn2txt }}</h3></div>
+        <div class="row"><div class="btn btn-link darklink btn-more">{{ section.settings.btntxt }}</div></div>
+      </a>
+    </li>
+    <li class="li-item li-feats">
+      <a href="{{ section.settings.collec3 }}" class="cllc-go w-inline-block">
+        <div class="padded"><h3 class="h3-item">{{ section.settings.btn3txt }}</h3></div>
+        <div class="row"><div class="btn btn-link darklink btn-more">{{ section.settings.btntxt }}</div></div>
+      </a>
+    </li>
+  </ul>
+</div>

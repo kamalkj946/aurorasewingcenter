@@ -1,0 +1,95 @@
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "text"
+      },
+      {
+        "type": "textarea",
+        "id": "paragraph",
+        "label": "Paragraph Text"
+      },
+      {
+        "type": "text",
+        "id": "btntxt",
+        "label": "Button Text",
+        "default": "text"
+      },
+      {
+        "type": "url",
+        "id": "btnlink",
+        "label": "Button Link"
+      }
+	]
+  }
+{% endschema %}
+
+<div class="footer">
+    <div class="foot-cols wide w-row">
+        <div class="col w-col w-col-3 w-col-stack">
+            <img src="{{ 'footer-logo.png' | asset_img_url : '500x' }}" alt="" loading="lazy" class="foot-logo" />
+            <div class="row-sico">
+                <a href="https://www.facebook.com/aurorasewing/" target="_blank" class="fa-soc"></a>
+            	<a href="https://www.instagram.com/aurorasewingcenter/" target="_blank" class="fa-soc"></a>
+                <a href="https://www.youtube.com/channel/UCYkCaFPnN8pR_knJ3eBHazg" target="_blank" class="fa-soc"></a>
+                <a href="https://www.google.com/maps?q=aurora+sewing+center&biw=1920&bih=1001&dpr=2&um=1&ie=UTF-8&sa=X&ved=2ahUKEwiK5ff26Iz3AhVflIkEHaTKBHEQ_AUoAnoECAIQBA" target="_blank" class="fa-soc"></a>
+          	</div>
+        </div>
+        <div class="col col-ft2 w-col w-col-5 w-col-stack">
+            <div class="columns">
+                <div class="columns w-row">
+                    <div class="col w-col w-col-6 w-col-small-6 w-col-tiny-6">
+                        {% for link in linklists.footer-left.links %}
+                          <a href="{{ link.url }}" class="golink">{{ link.title }}</a>
+                        {% endfor %}                                          
+                    </div>
+                    <div class="col w-col w-col-6 w-col-small-6 w-col-tiny-6">
+                        {% for link in linklists.footer-right.links %}
+                          <a href="{{ link.url }}" class="golink">{{ link.title }}</a>
+                        {% endfor %}  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-ft3 w-col w-col-4 w-col-stack">
+            <h4 class="footname">Locations</h4>
+            <div class="w-row">
+                <div class="col w-col w-col-4">
+                    <p class="bot25">
+                        <strong>EAST AURORA</strong><br />
+                        659 Main St.<br />
+                        East Aurora, NY 14052<br />
+                        <a href="tel:716-652-2811" class="teal">716.652.2811</a>
+                    </p>
+                </div>
+                <div class="col w-col w-col-4">
+                    <p>
+                        <strong>WILLIAMSVILLE</strong><br />
+                        8575 Main St.<br />
+                        Williamsville, NY 14221<br />
+                        <a href="tel:716-204-8350" class="teal">716.204.8350</a>
+                    </p>
+                </div>
+                <div class="col w-col w-col-4">
+                    <p>
+                        <strong>VICTOR</strong><br />
+                        11 Framark Dr.<br>
+                        Victor, NY 14564<br>
+                        <a href="tel:585-742-2680" class="teal">585.742.2680</a>
+                    </p>
+                </div>
+              
+            </div>
+            <h4 class="footname">Contact Us</h4>
+            <p>Email: <a href="mailto:info@aurorasewingcenter.com" class="teal">info@aurorasewingcenter.com</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="navlink smlink">© {{ 'now' | date: '%Y' }} Aurora Sewing Center</div>
+        <a target="_blank" href="https://www.nk4design.com" class="navlink smlink float-r">Website by NK4Design</a>
+    </div>
+</div>

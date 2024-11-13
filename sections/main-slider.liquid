@@ -1,0 +1,81 @@
+{% schema %}
+  {
+  "name": "Slideshow",
+  "tag": "section",
+  "class": "slideshow",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Slideshow"
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Slide",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         }, {
+           "type": "url",
+           "id": "imurl",
+           "label": "Slide URL"
+         }
+       ]
+     }
+   ]
+}
+
+{% endschema %}
+               
+<div
+     data-delay="5000"
+     data-animation="fade"
+     class="slider-top w-slider"
+     data-autoplay="true"
+     data-easing="ease"
+     data-hide-arrows="false"
+     data-disable-swipe="false"
+     data-autoplay-limit="0"
+     data-nav-spacing="3"
+     data-duration="1000"
+     data-infinite="true"
+     role="region"
+     aria-label="carousel"
+     >
+
+    <div class="mask w-slider-mask" id="w-slider-mask-1">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'slide' %}      
+      		<div class="w-slide aaaaa" role="group" aria-hidden="true" style="transform: translateX(0px); opacity: 1;">
+              <a href="{{ block.settings.imurl }}">
+              <picture>
+                <source media="(max-width:479px)" srcset="{{ block.settings.image | img_url : '600x' }}">
+                <img src="{{ block.settings.image | img_url : '1200x' }}" class="img" width={{ block.settings.image.width }} height="{{ block.settings.image.height }}" 
+                  {% if forloop.index == 1 %}loading="eager" {% else %}loading="lazy"{% endif %} >
+              </picture>                          
+              </a>
+      		</div>
+        {% endcase %}
+      {% endfor %}
+      <div aria-live="off" aria-atomic="true" class="w-slider-aria-label" data-wf-ignore=""></div>
+    </div>
+
+    <div class="hide aros w-slider-arrow-left" role="button" tabindex="0" aria-controls="w-slider-mask-1" aria-label="previous slide"><div class="w-icon-slider-left"></div></div>
+    <div class="hide aros w-slider-arrow-right" role="button" tabindex="0" aria-controls="w-slider-mask-1" aria-label="next slide"><div class="w-icon-slider-right"></div></div>
+    
+  	<div class="slidenav w-slider-nav w-round">
+      <div class="w-slider-dot w-active" data-wf-ignore="" aria-pressed="true" role="button" tabindex="0" style="margin-left: 3px; margin-right: 3px;"></div>
+      {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'slide' %}      
+            <div class="w-slider-dot" data-wf-ignore="" aria-pressed="false" role="button" tabindex="-1" style="margin-left: 3px; margin-right: 3px;"></div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  
+</div>

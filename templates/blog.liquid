@@ -1,0 +1,64 @@
+<style>
+  
+  .go-blog {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+  }
+  
+</style>
+
+<div class="header head-blog">
+  <div class="w-container">
+    <h1 class="">Aurora Sewing Center {{ blog.title }}</h1>
+  </div>
+</div>
+
+<div class="sect sect-blogs">
+  <div class="wide bot40 w-container">
+    {% paginate blog.articles by 1 %}
+      {% for article in blog.articles %}
+    
+        <div class="flex-ctr flex-blog w-row">
+          <div class="col w-col w-col-7">
+            <a href="{{ article.url }}" class="go-blog w-inline-block" style="background-image:url({{ article | img_url: '1400x' }})">
+              <img src="https://cdn.shopify.com/s/files/1/0238/9239/4048/files/widesc.jpeg?1658324525666448336" alt="" class="img-sp">
+            </a>
+          </div>
+          <div class="col w-col w-col-5">
+            <div class="blog-row">
+              <a href="{{ article.url }}">
+        	      <h3 class="h3-blog h3-blog1">{{ article.title }}</h3>
+    	          <p class="bot25">{{ article.content | strip_html | truncatewords: 30 }}</p>
+	              <a href="{{ article.url }}" class="btn btn-blog w-button">Read More</a>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+    {% endpaginate %}
+  </div>
+  
+  <div class="wide bot40 w-container">
+    <ul class="ul-blog">
+    {% paginate blog.articles by 21 %}
+      {% for article in blog.articles offset:1 %}
+        {% include 'li-blog' %}
+      {% endfor %}
+
+      {% if paginate.pages > 1 %}
+        {{ paginate | default_pagination | replace: 'Previous', 'Newer articles' | replace: 'Next', 'Older articles' }}
+      {% endif %}
+
+    {% endpaginate %}
+    </ul>
+  </div>
+</div>
+
+
+<div class="sect">
+  <div class="wide bot40 w-container">
+    
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<style type="text/css">
+  
+  .w-slide a img {
+    width: 100%;
+    height: auto;
+  }
+  .top-img img {
+    width: auto !important;
+    margin: auto !important;
+  	max-height: 140px !important;
+    border-radius: 5px;
+  }
+  .imght {
+  	height: 100% !important;
+  }
+  .marq {
+    animation: marq 35s linear infinite;
+  }
+  .marq-stop {
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
+  }
+
+  @keyframes marq {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .slide-row p a {
+  	color: #fff;
+    font-weight: bold;
+  }
+
+</style>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  });
+</script>
+
+<div class="hero wf-section">
+    <div class="wide rel w-container">
+        <div class="herobox">
+            <div class="col-hero w-row">
+                  <div class="hero-l w-col w-col-6 w-col-stack">
+                      {% section 'home-slide1' %}                    
+                      <div class="area-feat" style="overflow:hidden">
+                          <div class="row w-row">
+                              <div class="column w-col w-col-6">
+                                <div class="item item-top">
+                                  <div class="hero-line">Upcoming Class</div>
+                                  {% paginate collections.all.products by 1000 %}
+                                    {% for product in collections.['featured-class'].products %}
+                                      {% for image in product.images limit:1 %}
+                                        <a class="top-img qqqq" href="{{ product.url }}">
+                                            <img src="{{ image | img_url: '400x' }}" loading="lazy" alt="" class="imght" width="{{ image.width }}" height="{{ image.height }}" />
+                                        </a>
+                                      {% endfor %}
+                                      <h3 class="h3-item">{{ product.title }}</h3>
+                                      {% unless product.price == 0 %}
+                                      	<div class="prices">{{ product.price | money }}<span class="strike">{{ product.compare_at_price | money }}</span></div>
+                                      {% endunless %}
+                                      <a href="{{ product.url }}" class="btn w-button">Register Now</a>
+                                    {% endfor %}
+                                  {% endpaginate %}
+                                </div>
+                              </div>                            
+                              <div class="column-2 w-col w-col-6">
+                                  {% include 'slide-items' %}
+                                  <div class="colsplit"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="hero-r w-col w-col-6 w-col-stack">
+                    {% section 'main-slider' %}
+                  </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+<div class="sect sect-bar">
+    {% section 'top-3links' %}
+</div>
+
+<div class="sect sect-feats wf-section">
+    <div class="wide bot75 w-container">
+        <h2 class="bot25">Featured Products</h2>
+        <div class="row">          
+            <ul class="ul-item bot25">
+              {% for product in collections.['featured'].products limit:12 %}
+      			{% include 'li-item' %}
+              {% endfor %}
+            </ul>          
+            <div class="row ctr">
+              <a href="/collections/featured" class="btn w-button">View All Featured Items</a>
+          	</div>
+        </div>
+    </div>
+</div>
+
+<div class="sect sect-spec wf-section">
+    {% section 'specialties' %}
+</div>
+
+{% section 'home-about' %}
+{% section 'testimonials' %}
+{% section 'slider' %}
+{% section 'locations' %}
+{% include 'sect-cta' %}

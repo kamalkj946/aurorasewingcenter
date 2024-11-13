@@ -1,0 +1,109 @@
+<div class="navrow">
+  
+  {% unless template == 'cart' %}
+    {% section 'topbar' %}
+  {% endunless %}
+  
+  <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="nav w-nav">
+    <a href="/" class="logo w-nav-brand" aria-label="home">
+      <img src="{{ 'new_logo.png' | asset_img_url : '400x' }}" alt="" class="nav-logo" loading="eager" />
+    </a>
+    <div class="navlist w-nav-menu">
+      <div class="nav-hide">
+        <div class="navlink locc">East Aurora, NY<br /><a href="tel:7166522811" class="teal">(716) 652-2811</a></div>
+        <div class="navlink locc">Williamsville, NY<br /><a href="tel:7162048350" class="teal">(716) 204-8350</a></div>
+        <div class="navlink locc">Victor, NY<br /><a href="tel:5857422680" class="teal">(585) 742-2680</a></div>
+        <a href="/apps/bookthatapp/calendar" class="btn btn-nav w-nav-link">Classes &amp; Events</a>
+        <div class="nav-top">
+          <a href="#" onclick="searchgo()" class="navs">Search <span class="fa-nav"></span></a>{% if customer %}<a href="/account" class="navs">Account <span class="fa-nav"></span></a>{% else %}<a href="/account/login" class="navs">Login <span class="fa-nav"></span></a>{% endif %}<a href="/cart" class="navs">Cart {% if cart.item_count > 0 %}({{ cart.item_count }}){% else %}<span class="fa-nav"></span>{% endif %}</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="menu w-nav-button" style="-webkit-user-select: text;" aria-label="menu" role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </div>
+    <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
+  </div>
+  <div class="row-drops">
+    <div class="row-links">
+      {% comment %}
+      <div data-hover="true" data-delay="0" class="nav-dd w-dropdown">
+        <div class="navdd w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">
+          <div class="ddaro w-icon-dropdown-toggle" aria-hidden="true"></div>
+          <div>Collections</div>
+        </div>
+        <nav class="ddlist w-dropdown-list" id="w-dropdown-list-0" aria-labelledby="w-dropdown-toggle-0" style="height:400px; overflow: scroll">
+          {% for collection in collections %}
+  	        <a href="{{ collection.url }}" class="ddlink w-dropdown-link">{{ collection.title }}</a>
+          {% endfor %}
+        </nav>
+      </div>  
+      {% endcomment %}  
+      
+      {% for link in linklists.main-menu.links %}
+      	<div data-hover="true" data-delay="0" class="nav-dd w-dropdown">          
+            	
+              {% if link.links.size > 0 %}
+                
+                  <div class="navdd w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">
+                    <div class="ddaro"></div>
+                    <div>{{ link.title }}</div>
+                  </div>
+                
+    	          <nav class="ddlist w-dropdown-list" id="w-dropdown-list-0" aria-labelledby="w-dropdown-toggle-0" style="">
+                  {% for child_link in link.links %}                  
+                    {% assign count = count | plus: 1 %}
+                    {% if child_link.links.size == 0 %}
+                        <a href="{{ child_link.url }}" class="ddlink w-dropdown-link">{{ child_link.title }}</a>
+                    {% endif %}
+                    {% if child_link.links.size > 0 %}                  
+                        <div data-hover="true" data-delay="0" class="nav-dd drop-dd w-dropdown">
+                          <div class="navdd dropdd w-dropdown-toggle row" id="w-dropdown-toggle-{{ count }}" aria-controls="w-dropdown-list-{{ count }}" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">
+                            <div class="ddaro ddaro2"></div>
+                            <div>{{ child_link.title }}</div>
+                          </div>
+                          <nav class="ddlist ddlist2 w-dropdown-list" id="w-dropdown-list-{{ count }}" aria-labelledby="w-dropdown-toggle-{{ count }}" style="">
+                            {% for grandchild_link in child_link.links %}
+                              <a href="{{ grandchild_link.url }}" class="ddlink w-dropdown-link" style="">{{ grandchild_link.title }}</a>
+                            {% endfor %}
+                          </nav>
+                        </div>                  
+                    {% endif %}
+                  {% endfor %}
+                </nav>
+              {% else %}
+                  <a href="{{ link.url }}" class="navdd reglink">{{ link.title }}</a>
+              {% endif %}
+          </div>
+      {% endfor %}
+      
+      <div class="nav-right">
+        <a href="#" onclick="searchgo()" class="navico fff"></a>
+        {% if customer %}
+  	      <a href="/account" class="navico fff"></a>
+        {% else %}
+  	      <a href="/account/login" class="navico fff"></a>
+        {% endif %}
+        <a href="/cart" class="navs fff">Cart ({% if cart.item_count > 0 %}{{ cart.item_count }}{% else %}0{% endif %})</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="nav-search">
+    <div class="nav-flex">
+      <div class="w-container">
+        <form action="/search" method="get" role="search" class="form w-form">
+          <div id="email-form" name="email-form" class="form-find" aria-label="Email Form">
+            <div class="row">
+              <input id="search" type="search" class="msg msg-src w-input" name="q" placeholder="Search Store" id="" required="" /></div>
+            <div>
+            <input type="submit" value="Search" data-wait="Please wait..." class="btn btn-find w-button" /></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

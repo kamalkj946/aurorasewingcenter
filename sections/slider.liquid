@@ -1,0 +1,49 @@
+{% schema %}
+  {
+    "name": "Image Slider",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image1",
+        "label": "Image 1"
+      }, {
+        "type": "image_picker",
+        "id": "image2",
+        "label": "Image 2"
+      }, {
+        "type": "image_picker",
+        "id": "image3",
+        "label": "Image 3"
+      }, {
+        "type": "image_picker",
+        "id": "image4",
+        "label": "Image 4"
+      }, {
+        "type": "image_picker",
+        "id": "image5",
+        "label": "Image 5"
+      }
+	]
+  }
+{% endschema %}
+
+<div class="sect-marq wf-section">
+    <div class="track">
+        <div class="marq">
+            <div class="marqrow">
+                <div class="marqbox" style="background-image:url('{{ section.settings.image1 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+                <div class="marqbox" style="background-image:url('{{ section.settings.image2 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+                <div class="marqbox" style="background-image:url('{{ section.settings.image3 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+                <div class="marqbox" style="background-image:url('{{ section.settings.image4 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+                <div class="marqbox" style="background-image:url('{{ section.settings.image5 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+            </div>
+            <div class="marqrow">
+                <div class="marqbox" style="background-image:url('{{ section.settings.image1 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+                <div class="marqbox" style="background-image:url('{{ section.settings.image2 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+                <div class="marqbox" style="background-image:url('{{ section.settings.image3 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+                <div class="marqbox" style="background-image:url('{{ section.settings.image4 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+                <div class="marqbox" style="background-image:url('{{ section.settings.image5 | image_url: width: 700 }}')" loading="lazy" alt="" /></div>
+            </div>
+        </div>
+    </div>
+</div>

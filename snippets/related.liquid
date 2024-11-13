@@ -1,0 +1,117 @@
+{% assign show = 'featured' %}
+{% assign this = product.title %}
+{% assign vend = product.vendor %}
+{% assign thid = product.id %}
+{% assign feat = true %}
+{% assign count = 0 %}
+
+{% for collection in product.collections limit:1 %}
+	{% assign show == collection.title %}
+{% endfor %}
+
+{% for collection in product.collections %}
+
+  {% if collection.handle contains 'feet' %}
+	{% assign show = 'sewing' %}
+	{% assign feat = false %}
+  {% endif %}
+
+  {% if collection.handle contains 'machine' %}
+	{% assign show = 'feet' %}
+	{% assign feat = false %}
+  {% endif %}
+
+  {% if collection.handle contains 'class' %}
+	{% assign show = 'Related-Classes' %}
+	{% assign feat = false %}
+  {% endif %}
+
+  {% if collection.handle contains 'event' %}
+	{% assign show = 'event' %}
+	{% assign feat = false %}
+  {% endif %}
+
+{% endfor %}
+
+<style>
+  
+  .ul-item li:nth-of-type(1n+9){
+      display:none;
+   }
+  
+</style>
+
+
+<div class="sect sect-rec">
+  <div class="wide w-container">    
+      {% if product.metafields.custom.related_products %}
+        <h2 class="">Related Products</h2>
+        <ul class="ul-item">      
+          {% assign recommended_products =  product.metafields.custom.related_products.value %}
+          {% for product in recommended_products %}     
+              {% include 'li-item' %}
+          {% endfor %}
+        </ul>
+      {% else %}
+
+        {% if feat == false %}
+
+          {% if show == 'Related-Classes' %}
+              <h2 class="">Additional Classes</h2>
+          {% else %}
+              <h2 class="">Related Products</h2>
+          {% endif %}
+
+          {% if show == 'Related-Classes' %}
+              <ul class="ul-item">
+              {% for collection in product.collections %}
+                {% for product in collections.['Related-Classes'].products %}
+                  {% unless product.id == thid %}
+                    {% include 'li-item' %}
+                  {% endunless %}
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          {% else %}
+              <ul class="ul-item">
+            {% paginate collections.all.products by 1000 %}
+              {% for collection in product.collections limit:1 %}
+                {% for product in collections.[show].products %}
+                      {% if product.vendor == vend %}
+                          {% include 'li-item' %}
+                          {% capture length %}{{ forloop.length }}{% endcapture %}
+                      {% endif %}
+                {% endfor %}
+
+                {% if length == 0 %}
+                {% endif %}
+
+                {% if show != 'Featured-Class' %}
+                  {% for product in collections.[show].products %}
+                      {% include 'li-item' %}
+                  {% endfor %}
+                {% endif %}
+
+              {% endfor %}
+            {% endpaginate %}
+          </ul>
+
+          {% endif %}
+
+        {% else %}
+          <h2 class="">Featured Products</h2>
+          <ul class="ul-item">
+            {% paginate collections.all.products by 1000 %}
+              {% for collection in product.collections limit:1 %}
+                {% for product in collection.products %}
+                  {% unless product.id == thid %}
+                    {% include 'li-item' %}
+                  {% endunless %}
+                {% endfor %}
+              {% endfor %}
+            {% endpaginate %}
+          </ul>
+        {% endif %}
+      {% endif %}
+  </div>
+</div>

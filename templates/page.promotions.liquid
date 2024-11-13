@@ -1,0 +1,22 @@
+<style type="text/css">
+
+  .sect-page span, 
+  .sect-page a,
+  .sect-page span a {
+    color: #006675 !important;
+  } 
+  .sect-page img {
+      margin: auto;
+  }
+  
+</style>
+
+<div class="header">
+  <div class="wide w-container">
+	<h1 data-ix="loadfade">{{ page.title }}</h1>
+  </div>
+</div>
+
+{% section 'promo-cards' %}
+{% section 'coupons' %}
+{% include 'sect-cta' %}

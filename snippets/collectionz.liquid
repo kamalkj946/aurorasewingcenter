@@ -1,0 +1,177 @@
+<style type="text/css">
+
+    .linkrow a {
+      display: inline-block;
+      padding: 8px 20px;
+      text-decoration: none;
+      background-color: #eee;
+      font-weight: bold;
+      color: #31a89f;
+      font-size: 16px;
+      margin-bottom: 8px;
+      margin-right: 5px;
+    }
+    
+</style>
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+      
+      $("#sort-by").change(function(){
+        var sorturls = "{{ collection.url }}";
+        var sortthis = $("#sort-by").val();
+        var goto = sorturls + '?sort_by=' + sortthis;
+        window.location.replace(goto);       
+      });
+      
+    });
+  
+</script>
+
+<div class="head">
+  <div class="wide w-container">
+    <div class="row" data-ix="loadfade">
+      
+      <div class="cllc-top">
+        <h1 class="h1-cllc">{{ collection.title }}</h1>
+
+        {% if collection.image %}
+          <img src="{{ collection.image | img_url: '300x' }}" class="cllc-ico">
+        {% endif %}
+      </div>
+      
+      {% unless collection.title == 'Thread' %}
+          {{ collection.description }}
+      {% endunless %}
+      
+      {% if collection.title contains 'Permanent' %}
+      	{% include 'fabrics-top' %}
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+
+{% if collection.metafields.custom.sub_collections %}
+  {% assign level1 = true %}
+{% endif %}
+
+{% if level1 == true %}
+
+<div class="sect-collec">
+  <div class="wide w-container">
+      
+    <div class="row bot25">
+      <a href="/collections" class="dark">Shop</a><div class="caret"></div><div class="inline">{{ collection.title }}</div>
+    </div>
+    
+    <ul class="ul-cllc">
+      
+    {% if collection.metafields.custom.sub_collections %}
+      {% for collection in collection.metafields.custom.sub_collections.value %}
+        <li class="li-item li-feats">
+          <a href="{{ collection.url }}" class="cllc-go w-inline-block">
+            <div class="padded"><h3 class="h3-item">{{ collection.title }}</h3></div>
+            <div class="row"><div class="btn btn-link darklink btn-more">View More</div></div>
+          </a>
+        </li>
+      {% endfor %}
+      
+    {% endif %}
+
+      {% assign collections = collections | sort: 'Manual' %}  
+        {% for collection in collections %}
+          {% if collection.metafields.custom.main_supp_grid_ == true %}
+            {% include 'li-grid' %}
+          {% endif %}
+        {% endfor %}
+
+      
+      {% for collection in collection.metafields.custom.sub_collections %}
+        <li class="li-item li-feats">
+          <a href="{{ section.settings.collec3 }}" class="cllc-go w-inline-block">
+            <div class="padded"><h3 class="h3-item">{{ collection.title }}</h3></div>
+            <div class="row"><div class="btn btn-link darklink btn-more">{{ section.settings.btntxt }}</div></div>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+  
+<div class="sect sect-rec">
+  <div class="wide w-container">
+    <h2 class="">Featured Products</h2>
+    <ul class="ul-item">   
+        {% paginate collection.products by 1000 %}
+          {% for product in collection.products %}
+            {% include 'li-item' %}
+          {% endfor %}
+        {% endpaginate %}
+      
+      {% for collection in collection.metafields.custom.sub_collections %}
+        {% paginate collection.products by 1000 %}
+          {% for product in collection.products %}
+            {% include 'li-item' %}
+          {% endfor %}
+        {% endpaginate %}
+      {% endfor %}
+    </ul>
+  </div>  
+</div>
+
+{% else %}
+
+<div class="sect-collec">
+  <div class="wide w-container">
+    <div class="row">  
+      <div style="display:inline-block">
+        <a href="/collections" class="dark">Shop</a>
+
+        {% comment %}
+        <div class="caret"></div>
+        {% assign collectnow = collection.title %}
+        {% for collection in collections %}
+          {% if collection.metafields.custom.sub_collections %}
+            {% for collection in collection.metafields.custom.sub_collections.value %}
+              {% if value == collectnow %}
+                <a href="{{ collection.url }}" class="dark">{{ collection.title }}</a>..
+              {% endif %}
+            {% endfor %}
+          {% endif %}          
+        {% endfor %}
+  
+        {% endcomment %}
+  
+        <div class="caret"></div>  
+        <div class="inline">{{ collection.title }}</div>
+      </div>
+      
+      <div style="display:inline-block; padding-left: 25px;" >
+        Sort by:
+        {% assign selected = collection.sort_by %}
+        <select id="sort-by" class="sort-by">
+          {% for option in collection.sort_options %}
+          	<option value="{{ option.value }}"{% if collection.sort_by == option.value %} selected="selected"{% endif %}>{{ option.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    
+    <ul class="ul-item">
+      {% paginate collection.products by 1000 %}
+        {% for product in collection.products %}
+          {% include 'li-item' %}
+        {% endfor %}
+      {% endpaginate %}
+    </ul>
+  </div>
+</div>
+
+{% endif %}
+
+
+{% include 'sect-cta' %}

@@ -1,0 +1,126 @@
+{% schema %}
+  {
+    "name": "About Us",
+    "settings": [
+    {
+      "type": "text",
+      "id": "topheading",
+      "label": "Heading",
+      "default": "text"
+    },
+    {
+      "type": "textarea",
+      "id": "pgph",
+      "label": "Paragraph",
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "btntxt",
+      "label": "Button Text",
+      "default": "text"
+    },
+    {
+      "type": "url",
+      "id": "btnurl",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "imgcapt",
+      "label": "Image Caption",
+      "default": "text"
+    },
+	{
+      "type": "image_picker",
+      "id": "imgmain",
+      "label": "Image"
+	},
+	{
+      "type": "image_picker",
+      "id": "imgbadge1",
+      "label": "Badge 1"
+	},
+	{
+      "type": "image_picker",
+      "id": "imgbadge2",
+      "label": "Badge 2"
+	},
+	{
+      "type": "image_picker",
+      "id": "imgbadge3",
+      "label": "Badge 3"
+	},
+	{
+      "type": "image_picker",
+      "id": "imgbadge4",
+      "label": "Badge 4"
+	},
+	{
+      "type": "image_picker",
+      "id": "imgbadge5",
+      "label": "Badge 5"
+	},
+	{
+      "type": "image_picker",
+      "id": "imgbadge6",
+      "label": "Badge 6"
+	}
+  ]
+
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+<div class="sect sect-fam wf-section">
+    <div class="wide wide-fam w-container">
+        <div class="flex-ctr flip-sm w-row">
+            <div class="col0 w-col w-col-6" data-ix="scrollfade" style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 1200ms ease 0s, transform 1600ms ease 0s;">
+                <div class="col-row">
+                    <h2 class="">{{ section.settings.topheading }}</h2>
+                    <p class="bot25">{{ section.settings.pgph }}</p>
+                    <a href="{{ section.settings.btnurl }}" class="btn btn-line w-button">{{ section.settings.btntxt }}</a>
+                </div>
+            </div>
+            <div class="col0 bot25-sm w-col w-col-6">
+                <div class="box-owners">
+                    <picture>
+                      <source media="(max-width:479px)" srcset="{{ section.settings.imgmain | img_url : '500x' }}">
+                      <img src="{{ section.settings.imgmain | img_url : '1000x' }}" class="img" loading="lazy" >
+                    </picture>                
+
+                    <div class="badge badge-l">
+                        {% if section.settings.imgbadge1 %}
+                          <img src="{{ section.settings.imgbadge1 | image_url }}" class="img-badge" loading="lazy" />
+                        {% endif %}
+                        {% if section.settings.imgbadge2 %}
+                          <img src="{{ section.settings.imgbadge2 | image_url }}" class="img-badge" loading="lazy" />
+                        {% endif %}
+                        {% if section.settings.imgbadge3 %}
+                          <img src="{{ section.settings.imgbadge3 | image_url }}" class="img-badge" loading="lazy" />
+                        {% endif %}
+                    </div>
+                    <div class="badge">
+                        {% if section.settings.imgbadge4 %}
+                          <img src="{{ section.settings.imgbadge4 | img_url : '160x' }}" class="img-badge badge2" loading="lazy" />
+                        {% endif %}
+                        {% if section.settings.imgbadge5 %}
+                          <img src="{{ section.settings.imgbadge5 | img_url : '160x' }}" class="img-badge"  loading="lazy" />
+                        {% endif %}
+                        {% if section.settings.imgbadge6 %}
+                          <img src="{{ section.settings.imgbadge6 | img_url : '160x' }}" class="img-badge"  loading="lazy" />
+                        {% endif %}
+                    </div>
+                    <div class="box-bg"></div>
+                    <div class="imgtag">{{ section.settings.imgcapt }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

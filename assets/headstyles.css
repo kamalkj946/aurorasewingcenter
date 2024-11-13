@@ -1,0 +1,211 @@
+/* main {
+  padding: 20px;
+  padding-top: 200px;
+} */
+
+#aurora-sewing-center main {
+  min-height: 100vh !important;
+}
+
+
+.h3-item {
+   overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3; 
+   -webkit-box-orient: vertical;
+}
+
+.navdd:hover .ddaro {
+  opacity:1;
+}
+
+.li-blog a:not(.btn),
+.blog-row a:not(.btn) {
+  text-decoration: none;
+  color: #0d0e30;
+}
+
+span.strike {
+	padding-left: 6px;
+}
+.product-compare-price {
+	font-weight: normal;
+}
+
+.top-img .img {
+  width: auto !important;
+  max-width: 110px !important;
+  margin: auto;
+  max-height: 110px;
+}
+
+#caltxt {
+	margin-top:200px;
+  text-align: center;
+}
+
+table tbody tr td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+table tbody tr td img {
+  margin-bottom: 25px !important;
+}
+table tbody tr {
+  padding-bottom: 25px !important;
+}
+.item-rtb a,  
+.item-rtb a span {
+	color: #006675 !important;
+}
+
+.item-rtb::-webkit-scrollbar,
+.ddlist::-webkit-scrollbar,
+#bta-product-select {
+  display: none;
+}
+
+#bta-calendar {
+  padding: 20px;
+  padding-top: 50px;
+  width: 1300px;
+  max-width: 100%;
+  margin: auto;
+}
+.fc-toolbar.fc-header-toolbar {
+	margin-bottom: 20px !important;
+}
+.item-rtb img {
+  width: auto !important;
+}
+
+.golink.w--current,
+.ddlink.w-dropdown-link.w--current {
+	color: #111 !important;
+}
+
+div.ctct-form-embed div.ctct-form-defaults h2.ctct-form-header {
+    margin-top: 0px !important;
+    margin-bottom: 10px !important;
+    font-family: Prata,sans-serif !important;
+    font-size: 2em !important;
+    line-height: 1.3em !important;
+    font-weight: 400 !important;
+    letter-spacing: -.5px !important;
+}
+.ctct-banner-content div.ctct-form-banner form.ctct-form-custom input.ctct-form-element {
+	border: none;
+}
+.ctct-form-text,
+.ctct-form-header {
+	font-family: 'avenir' !important;
+}
+.sort-by {
+  padding: 10px;
+  border: 1px solid #bbb;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+#email_address_0 {
+	border: none !important;
+}
+
+.ctct-form-button,
+a input {
+	border: none !important;
+    min-width: 100px !important;
+    padding: 12px 25px 9px !important;
+    border-radius: 4px !important;
+    -webkit-transition: opacity .2s ease !important;
+    transition: opacity .2s ease !important;
+    font-family: Avenir,sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    text-align: center !important;
+    letter-spacing: .2px !important;
+    cursor: pointer !important;
+}
+.ctct-form-button {
+	width: auto !important;
+}
+
+.hide {
+	display: none;
+}
+
+.addoff {
+	right: -250px;
+}
+
+h1 strong {
+	font-weight: 400;
+}
+
+.ctct-gdpr-text {
+	display: none;
+}
+.ctct-banner-content div.ctct-form-defaults h2.ctct-form-header {
+	font: auto !important;
+}
+.ctct-form-embed.form_0 .ctct-form-defaults {
+	background: transparent !important;
+}
+
+.item-rtb iframe {
+	max-width: 100% !important;
+}
+
+.shopify-policy__container {
+	padding-top: 200px;
+}
+
+
+@font-face {
+  font-family: 'Fontawesome';
+  src: url('https://cdn.shopify.com/s/files/1/0114/3196/8868/files/fontawesome.ttf?v=1698778524') format('truetype') !important;
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+}
+@font-face {
+  font-family: 'Avenir';
+  src: url('https://assets.website-files.com/616b41a03e3b48136b64f0ec/6205d70cd55151e8dca2a84e_AvenirLTStd-Roman.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avenir';
+  src: url('https://assets.website-files.com/616b41a03e3b48136b64f0ec/6205d70cf2187a67a3a1c16b_AvenirLTStd-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.topbar {
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+
+@media screen and (max-width: 767px) {
+
+  #dummy-chat-button-iframe {
+    z-index:2 !important;
+  }
+  .ctct-banner-content div.ctct-form-defaults {
+    width: 90% !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .ctct-banner-content div.ctct-form-banner form.ctct-form-custom {
+    min-height: auto !important;
+  }
+  .ctct-banner-content div.ctct-form-banner form.ctct-form-custom div.ctct-form-field {
+    margin-bottom: 0px !important;
+  }
+
+}

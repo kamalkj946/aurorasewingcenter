@@ -1,0 +1,114 @@
+{% schema %}
+  {
+    "name": "3 Link Bar",
+    "settings": [
+    {
+      "type": "text",
+      "id": "text1",
+      "label": "Box 1 Heading",
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "desc1",
+      "label": "Box 1 Description",
+      "default": "text"
+    },
+    {
+      "type": "url",
+      "id": "link-1",
+      "label": "Block 1 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon-1",
+      "label": "Box 1 Icon"
+	},
+	{
+      "type": "text",
+      "id": "text2",
+      "label": "Box 2 Heading",
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "desc2",
+      "label": "Box 2 Description",
+      "default": "text"
+    },
+    {
+      "type": "url",
+      "id": "link-2",
+      "label": "Block 2 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon-2",
+      "label": "Box 2 Icon"
+    },
+	{
+      "type": "text",
+      "id": "text3",
+      "label": "Box 3 Heading",
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "desc3",
+      "label": "Box 3 Description",
+      "default": "text"
+    },
+    {
+      "type": "url",
+      "id": "link-3",
+      "label": "Block 3 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon-3",
+      "label": "Box 3 Icon"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<div class="wide w-container">
+  <div class="w-row">
+    <div class="w-col w-col-4">
+      <a href="{{ section.settings.link-1 }}" class="go-bar w-inline-block">
+        <img class="icons" src="{{ section.settings.icon-1 | img_url : '80x' }}" loading="lazy">
+        <div class="row">
+          <h4 class="heading-3">{{ section.settings.text1 }}</h4>
+          <div>{{ section.settings.desc1 }}</div>
+        </div>
+        <div class="aro-r"></div>
+      </a>
+    </div>
+    <div class="w-col w-col-4">
+      <a href="{{ section.settings.link-2 }}" class="go-bar w-inline-block">
+        <img class="icons" src="{{ section.settings.icon-2 | img_url : '80x' }}" loading="lazy">
+        <div class="row">
+          <h4 class="heading-3">{{ section.settings.text2 }}</h4>
+          <div>{{ section.settings.desc2 }}</div>
+        </div>
+        <div class="aro-r"></div>
+      </a>
+    </div>
+    <div class="w-col w-col-4">
+      <a href="{{ section.settings.link-3 }}" class="go-bar w-inline-block">
+        <img class="icons" src="{{ section.settings.icon-3 | img_url : '80x' }}" loading="lazy">
+        <div class="row">
+          <h4 class="heading-3">{{ section.settings.text3 }}</h4>
+          <div>{{ section.settings.desc3 }}</div>
+        </div>
+        <div class="aro-r"></div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'Avenir Roman';
+  src: url('https://cdn.shopify.com/s/files/1/0238/9239/4048/files/Avenir-Roman-12.ttf?7735749724315379723') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Fontawesome';
+  src: url('https://cdn.shopify.com/s/files/1/0238/9239/4048/files/fontawesome-webfont.ttf?7735749724315379723') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Avenir Roman';
+  src: url('https://cdn.shopify.com/s/files/1/0238/9239/4048/files/Avenir-Black-03.ttf?7735749724315379723') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@media (max-width: 991px) {
+
+}
+
+@media (max-width: 767px) {
+
+}
+
+@media (max-width: 479px) {
+
+}

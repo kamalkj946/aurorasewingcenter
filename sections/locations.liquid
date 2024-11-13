@@ -1,0 +1,127 @@
+{% schema %}
+  {
+    "name": "Locations",
+    "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "paragraph",
+          "label": "Paragraph"
+        },
+        {
+          "type": "image_picker",
+          "id": "img-1",
+          "label": "Location 1 Image"
+        },
+        {
+          "type": "text",
+          "id": "loca1",
+          "label": "Location 1 Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "locaad1",
+          "label": "Location 1 Address"
+        },
+        {
+          "type": "richtext",
+          "id": "loca1hrs",
+          "label": "Location 1 Hours"
+        },
+        {
+          "type": "image_picker",
+          "id": "img-2",
+          "label": "Location 2 Image"
+        },
+        {
+          "type": "text",
+          "id": "loca2",
+          "label": "Location 2 Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "locaad2",
+          "label": "Location 2 Address"
+        },
+        {
+          "type": "richtext",
+          "id": "loca2hrs",
+          "label": "Location 2 Hours"
+        },
+        {
+          "type": "image_picker",
+          "id": "img-3",
+          "label": "Location 3 Image"
+        },
+        {
+          "type": "text",
+          "id": "loca3",
+          "label": "Location 3 Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "locaad3",
+          "label": "Location 3 Address"
+        },
+        {
+          "type": "richtext",
+          "id": "loca3hrs",
+          "label": "Location 3 Hours"
+        },
+        {
+          "type": "text",
+          "id": "btntxt",
+          "label": "Button Text"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<div class="sect wf-section">
+    <div class="wide w-container">
+      <div class="row ctr bot50">
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.paragraph }}</p>
+      </div>
+        <div class="w-row">
+            <div class="col-loca w-col w-col-4">
+                <div class="row-loca" data-ix="scrollfade" style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 1200ms ease 0s, transform 1600ms ease 0s;">
+                    <img src="{{ section.settings.img-1 | image_url }}" loading="lazy" alt="" class="img bot40" />
+                    <h3>{{ section.settings.loca1 }}</h3>
+                    <div class="text-block-2">{{ section.settings.locaad1 }}</div>
+                    <p class="p-md">{{ section.settings.loca1hrs }}</p>
+                    <a href="/pages/locations-hours" class="btn btn-link darklink w-button">{{ section.settings.btntxt }}</a>
+                </div>
+            </div>
+            <div class="col-loca w-col w-col-4">
+                <div class="row-loca" data-ix="scrollfade" style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 1200ms ease 0s, transform 1600ms ease 0s;">
+                    <img src="{{ section.settings.img-2 | image_url }}" loading="lazy" alt="" class="img bot40" />
+                    <h3>{{ section.settings.loca2 }}</h3>
+                    <div class="text-block-2">{{ section.settings.locaad2 }}</div>
+                    <p class="p-md">{{ section.settings.loca2hrs }}</p>
+                    <a href="/pages/locations-hours" class="btn btn-link darklink w-button">{{ section.settings.btntxt }}</a>
+                </div>
+            </div>
+            <div class="col-loca w-col w-col-4">
+                <div class="row-loca" data-ix="scrollfade" style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 1200ms ease 0s, transform 1600ms ease 0s;">
+                    <img src="{{ section.settings.img-3 | image_url }}" loading="lazy" alt="" class="img bot40" />
+                    <h3>{{ section.settings.loca3 }}</h3>
+                    <div class="text-block-2">{{ section.settings.locaad3 }}</div>
+                    <p class="p-md">{{ section.settings.loca3hrs }}</p>
+                    <a href="/pages/locations-hours" class="btn btn-link darklink w-button">{{ section.settings.btntxt }}</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

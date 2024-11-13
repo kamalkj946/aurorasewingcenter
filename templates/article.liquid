@@ -1,0 +1,78 @@
+<style type="text/css">
+  
+  .blog-content {
+  	font-weight: 400 !important;
+  }  
+  
+  .tagz {
+    display: inline-block;
+  	background-color: #31a89f;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 25px;
+    padding: 4px 20px;
+    padding-top: 6px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    -webkit-transition: background-color 200ms ease;
+    transition: background-color 200ms ease;
+  }
+  .tagz:hover {
+  	background-color: #99c456;
+  }
+</style>
+
+
+<div class="header head-blog">
+  <div class="w-container bot50" data-ix="loadfade">
+    <h1 class="">{{ article.title }}</h1>
+    <time class="auth" pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">Published {{ article.published_at | date: '%b %d, %Y' }}</time>
+  </div>
+</div>
+    
+    
+<div class="sect sect-blog">
+  <div class="blogimg w-container">
+      <img src="{{ article | img_url: '1600x' }}" alt="" class="img">
+  </div>
+  
+  <div class="w-container">
+    <div class="bot40">{{ article.content }}</div>
+    
+    {% if article.tags.size > 0 %}
+      <div class="row" style="margin-bottom: 5px;">
+        {% for tag in article.tags %} 
+          <a class="tagz" href="{{ blog.url }}/tagged/{{ tag | handle }}">#{{ tag }}</a>{% unless forloop.last %}{% endunless %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    <div class="row">
+	    <a href="/blogs/posts" class="tagz">Back to Blogs</a>
+    </div>
+    
+  </div>
+</div>
+
+{% assign thisid = article.id %}
+
+<div class="sect sect-more">
+  <div class="wide bot40 w-container">
+    <div class="blogs-up">
+      <ul class="ul-blog">
+      {% paginate blog.articles by 21 %}
+        {% for article in blog.articles %}	
+        	{% unless article.id == thisid %}
+	          {% include 'li-blog' %}
+        	{% endunless %}
+        {% endfor %}
+
+        {% if paginate.pages > 1 %}
+          {{ paginate | default_pagination | replace: 'Previous', 'Newer articles' | replace: 'Next', 'Older articles' }}
+        {% endif %}
+
+      {% endpaginate %}
+      </ul>
+    </div>
+  </div>
+</div>

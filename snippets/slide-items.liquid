@@ -1,0 +1,43 @@
+<div data-delay="4000"
+     data-animation="outin"
+     class="slide-item w-slider"
+     data-autoplay="false"
+     data-easing="ease"
+     data-hide-arrows="false"
+     data-disable-swipe="false"
+     data-autoplay-limit="0"
+     data-nav-spacing="3"
+     data-duration="1200"
+     data-infinite="true"
+     role="region"
+     aria-label="carousel"
+     >  
+    <div class="mask w-slider-mask" id="w-slider-mask-2">
+      {% paginate collections.all.products by 1000 %}
+        {% for collection in collections %}
+          {% for product in collection.products %}
+            {% if product.tags contains 'feat' limit:1 %}
+              <div class="slide w-slide" role="group" style="padding-top:35px">
+                <div class="row"><div class="hero-line ctr">Save Today!</div></div>
+                <div class="top-botr ctr">
+                    {% for image in product.images limit:1 %}<a class="top-img" href="{{ product.url }}"><img src="{{ image | img_url: '400x' }}" loading="lazy" alt="" class="imght" style="width:auto" /></a>{% endfor %}
+                    <h3 class="h3-item">{{ product.title }}</h3>
+                    {% unless product.price == 0 %}
+                    	<div class="prices">{{ product.price | money }}<span class="strike">{{ product.compare_at_price | money }}</span></div>
+                    {% endunless %}
+                    <a href="{{ product.url }}" class="btn w-button">View More</a>
+                  </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% endpaginate %}      
+      <div aria-live="off" aria-atomic="true" class="w-slider-aria-label" data-wf-ignore=""></div>
+    </div>    
+  	<div class="hide w-slider-arrow-left" role="button" tabindex="0" aria-controls="w-slider-mask-2" aria-label="previous slide"><div class="w-icon-slider-left"></div></div>
+    <div class="hide w-slider-arrow-right" role="button" tabindex="0" aria-controls="w-slider-mask-2" aria-label="next slide" style=""><div class="w-icon-slider-right"></div></div>
+    <div class="topnav hide w-slider-nav w-round">
+        <div class="w-slider-dot w-active" data-wf-ignore="" aria-label="Show slide 1 of 2" aria-pressed="true" role="button" tabindex="0" style="margin-left: 3px; margin-right: 3px;"></div>
+        <div class="w-slider-dot" data-wf-ignore="" aria-label="Show slide 2 of 2" aria-pressed="false" role="button" tabindex="-1" style="margin-left: 3px; margin-right: 3px;"></div>
+    </div>
+</div>

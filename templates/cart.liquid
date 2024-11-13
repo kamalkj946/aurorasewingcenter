@@ -1,0 +1,177 @@
+<style>
+  
+  .msg.msg-area {
+   	min-height: 75px; 
+    padding-top 5px !important;
+  }
+  
+</style>
+
+<script>
+    
+  $(document).ready(function() {
+
+    $('.cartnum').on('change', function() {
+      var qtyurl = '/cart/change?line=';
+      var qtycnt = $(this).data('attr');
+      var qtyend = '&quantity=';
+      var qtnow = $(this).val();
+
+      if ( qtnow > 0) {
+        var minqty = qtyurl + qtycnt + qtyend + qtnow;
+        window.location.href = minqty;
+      };
+    });
+
+    $('#apply').click(function() {
+      $('#codenowco').show();
+      var thiscode = $('#discount').val().toUpperCase();
+      $('#codenow').text(thiscode);
+      $('#codenowco').show();
+    });
+    
+    $('#discount').on('change', function() {
+      $('#codenowco').hide();
+    });
+    
+  });
+  
+</script>
+
+<div class="page-cart">
+
+{% if cart.item_count > 0 %}
+
+  <form action="/cart" method="post">
+
+    <div class="wide w-container">
+        
+      <div class="w-row">
+        <div class="col w-col w-col-6">
+      		<h1 class="h1-sm" data-ix="h1-load">Your Cart</h1>   
+
+          	<ul class="ul-cart">
+              {% for item in cart.items %}    
+				<li class="li-cart">
+                  {% assign collection_url = item.product.collections.last.url %}
+                  {% if collection_url == '/collections/frontpage' or collection_url == blank %}
+                    {% assign collection_url = '/collections/all' %}
+                  {% endif %}
+                  {% if forloop.first %}
+                    {% assign continue_shopping_url = collection_url %}
+                  {% endif %}                  
+                  <div class="cart-img">
+                    <img src="{{ item | img_url: 'grande' }}"  alt="{{ item.title | escape }}" alt="{{ item.title }}" class="img">
+                  </div>
+                  <div class="cart-li-r">
+                    <div class="cart-info">
+                      <a href="{{ collection_url }}{{ item.url }}" class="a-vari">
+                        {{ item.title }}
+                      </a>
+                      <div class="total-sp">
+                        <div>Price</div>
+                        <p class="totals">{{ item.price | money }}</p>
+                      </div>
+                      <div class="total-sp">
+                        <div>Quantity</div>
+                        <input value="{{ item.quantity }}" data-attr="{{ forloop.index }}" min="0" class="cartnum" type="number" name="updates[]" id="updates_{{ item.id }}" style="border: 1px solid #ddd; padding: 6px; display: inline-block; width: 50px;"/>
+                      </div>
+                      <div class="total-sp">
+                        <div>Total</div>
+                        <p class="totals">{{ item.line_price | money }}</p>
+                      </div>
+                    </div>
+                    <a href="{{ item.url_to_remove }}" class="cart-link">Remove</a>
+                  </div>
+                </li>
+              {% endfor %}
+              </ul>
+              <div class="row bot25-sm ctr-sm">
+              	<input type="submit" style="font-weight: 900;" class="btn btn-f w-button" name="update" value="Update Cart" />
+              </div>
+        </div>
+        
+        <div class="col-stickcart w-col w-col-6 bot50-sm">
+            <div class="buybox bot25">
+              <div class="buytop">
+                <h2>Cart Summary</h2>
+              </div>
+              
+              <ul class="ul-buy row">
+                <li class="li-buy li-buylast">
+                  <div class="buy-flex">
+                    <div class="dim-2 tots">Subtotal</div>
+                    <div class="buy-total">{{ cart.total_price | money }}</div>
+                  </div>
+                </li>
+
+                {% comment %}
+               <li class="li-buy">
+                    <div class="buy-flex">
+                        <div class="cart-disc w-clearfix">
+                            <input value="" type="text" name="discount" style="max-width: 100%;" class="cart-msg" id="discount" placeholder="Coupon Code">
+                            <div id="apply" class="cart-msg msg-btn"><span class="text-span">Apply</span></div>
+                        </div>
+                    </div>
+                    <div id="codenowco" style="display:none">'<span id="codenow"></span>' applied at checkout</div>
+                </li>
+                {% endcomment %}
+
+
+                <li class="li-buy li-buylast">
+                    {% assign diff = 15000 | minus: cart.total_price %}
+                    {% assign meterpct = cart.total_price | times:0.0066666 %}
+                    <div class="shipmeter"><div class="meter" style="width:{{ meterpct }}%"></div></div>
+                    {% if cart.total_price > 15000 %}
+                      <div class="dim-2 tots">Receive Free US Shipping at $150</div>
+                    {% else %}
+                      <div class="dim-2 tots">Spend {{ diff | money }} more to receive FREE US shipping</div>
+                    {% endif %}
+                </li>
+
+              </ul>
+
+              {% if cart.total_price < 15000 %}
+                <div class="ctr bot10" style="border-radius: 3px; font-size: .9em; font-weight:bold; border: 2px solid #99C355; padding: 8px 3px; padding-top:10px">Shipping will be calculated upon checkout</div>
+              {% endif %}
+  
+              <label>Special instructions for seller</label>
+              <textarea class="msg msg-area row" name="note" style="max-height: 80px">{{ cart.note }}</textarea>
+              
+              <input type="submit" class="btn btn-buy w-button" name="checkout" value="Begin Checkout" />
+
+              <div class="row ctr bot10">
+                <p class="p-sm">or checkout with:</p>
+              </div>
+              
+              <div class="row ctr bot10">
+              {% comment %}Paypal and Google checkout buttons
+              {% if additional_checkout_buttons %}
+                {{ content_for_additional_checkout_buttons }}
+              {% endif %}
+              {% endcomment %}
+			  </div>              
+            </div>
+          
+            <div class="row ctr">
+              <a href="/collections/all" class="btn btn-f w-button">or Continue Shopping</a>
+            </div>
+        </div>
+      </div>    
+
+    </div>
+
+  </form>
+
+{% else %}
+
+<div class="page">
+  <div class="ctr w-container">
+    <h1 class="bot25">Your Cart is currently empty</h1>
+    <a href="/collections/featured" class="btn w-button">Return to Shop</a>
+  </div>
+</div>
+
+{% endif %}
+  
+</div>

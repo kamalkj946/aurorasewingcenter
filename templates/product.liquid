@@ -1,0 +1,323 @@
+<style>
+  
+  .single-option-selector {
+  	font-weight: 700;
+    padding: 15px;
+    cursor: pointer;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  
+</style>
+
+<script>
+  
+  $(document).ready(function() {
+    $('.img-side').click(function() {
+      var thisimg = $(this).attr('src');
+      $('#img1').attr('src',thisimg);
+    });
+    
+    $('#min').click(function() {
+      var thisqt = +$('.qty-num').val();
+      if (thisqt > 1) {
+        $('.qty-num').val(thisqt - 1); 
+      };
+    });  
+    
+    $('#add').click(function() {
+      var thisqt = +$('.qty-num').val();
+      $('.qty-num').val(thisqt + 1);
+    });  
+    
+  });  
+  
+  $(document).scroll(function() {
+
+    if ($(document).scrollTop() > 300) {
+      $('.botadd').removeClass('addoff');
+    }
+    else {
+      $('.botadd').addClass('addoff');
+    }
+    
+  });  
+  
+</script>
+    
+{% for collection in product.collections %}
+	{% if collection.handle contains "event" %}
+		{% assign event = true %}
+	{% endif %}
+{% endfor %}
+
+<div itemscope itemtype="http://schema.org/Product" class="sect sect-item">
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+  <meta itemprop="image" content="{{ product | img_url: 'grande' }}" />  
+  <div class="wide w-container">
+    <div class="row bot15">
+      <a href="/collections" class="dark">Shop</a>
+      <div class="caret"></div>  
+      {% for collection in product.collections limit:1 %}
+	      <a href="{{ collection.url }}" class="dark">{{ collection.title }}</a>
+      {% endfor %}
+      <div class="caret"></div>  
+      <div class="inline">{{ product.title }}</div>
+    </div>    
+    <div class="divi"></div>    
+    {% form "product", product, data-productid: product.id, class: productClasses %}
+      <div class="w-row">
+        <div class="col-itempic w-col w-col-6">
+            <div class="flex-itempic">
+                <div class="item-box">
+                    <a href="#" id="lbimg" class="lightbox-item w-inline-block w-lightbox" aria-label="open lightbox" aria-haspopup="dialog">
+                      {% for image in product.images limit:1 %}
+                          <img id="img1" src="{{ image | img_url: 'x1000' }}" loading="lazy" alt="" class="img-itemtop" />
+                      {% endfor %}
+                      <script type="application/json" class="w-json">
+                            {
+                                "items": [
+                                    {% for image in product.images %}
+                                      {
+                                          "_id": "example_img",
+                                          "origFileName": "1.jpeg",
+                                          "fileName": "1.jpeg",
+                                          "fileSize": 209275,
+                                          "height": auto,
+                                          "url": "{{ image | img_url: 'x800' }}",
+                                          "width": 2000,
+                                          "type": "image"
+                                      }
+                                     {% unless forloop.last %},{% endunless %}
+                                    {% endfor %}
+
+                                ],
+                                "group": ""
+                            }
+                        </script>
+                    </a>
+                </div>
+                <div class="div-block-3">
+                  {% if product.images.size > 0 %}
+                      {% for image in product.images %}
+                        <img src="{{ image | img_url: 'x800' }}" loading="lazy" alt="" class="img-side" />
+                      {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="row">
+                    {% assign external_videos = product.media | where: "media_type", "external_video" %}
+                    {% for external_video in external_videos %}
+                          <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/{{ external_video.external_id }}' frameborder='0' allowfullscreen></iframe></div>
+                    {% endfor %}
+                    {% for media in product.media %}
+                      {% case media.media_type %}dd
+                        <div class="imgbox" style="width: 100%" data-media-id="{{ media.id }}">
+                          {{ media | model_viewer_tag }}
+                        </div>
+                      {% endcase %}
+                    {% endfor %}
+                </div>
+            </div>
+          </div>
+          <div class="col-iteminfo w-col w-col-6">
+          <h1 class="h1-item">{{ product.title }}</h1>       
+
+          {% if product.price != 0 %}
+              <div class="row bot10">
+                <div id="product-price" class="price">{{ product.price | money }}</div>
+                
+                {% for tag in product.tags %}                  
+                  {% if tag contains 'sale' %}
+                    <div class="tags">sale</div>
+                    {% break %}
+                  {% endif %}
+                  {% if tag contains 'Sale-5'
+                     or tag contains 'Sale-10'
+                     or tag contains 'Sale-15'
+                     or tag contains 'Sale-20'
+                     or tag contains 'Sale-25'
+                     or tag contains 'Sale-30'
+                     or tag contains 'Sale-35'
+                     or tag contains 'Sale-40'
+                     or tag contains 'Sale-45'
+                     or tag contains 'Sale-50'
+                     or tag contains 'Sale-55'
+                     or tag contains 'Sale-60'
+                     or tag contains 'Sale-65'
+                     or tag contains 'Sale-70'
+                     or tag contains 'Sale-75'
+                  %}
+                    {% assign salenum = tag | remove: "Sale-" %}
+                    <div class="tags">Save {{ salenum }}%</div>
+                  {% endif %}
+                {% endfor %}
+
+                {% comment %}
+                
+                  {% if product.title contains 'Brother Feet' or product.title contains 'Brother Accessories' %}
+                    {% assign code = 'BRO-20%' %}
+                  {% endif %}
+                  {% if product.title contains 'Brother Multi-Needle Accessories' %}
+                    {% assign code = 'BRO-20%' %}
+                  {% endif %}
+                  {% if product.title contains 'Brother Feet' or product.title contains 'Brother Accessories' %}
+                    {% assign code = 'BRO-20%' %}
+                  {% endif %}
+                  {% if product.title contains 'Brother Feet' or product.title contains 'Brother Accessories' %}
+                    {% assign code = 'BRO-20%' %}
+                  {% endif %}
+                
+                {% endcomment %}                
+    
+                {% if product.tags contains 'bogo-' %}
+                  <div class="tags">BOGO</div>
+                {% endif %}
+              </div>
+          {% else %}
+              {% if product.compare_at_price > 0 %}
+                <div class="row bot10">
+                  <div class="price price-x">{{ product.compare_at_price | money }}</div>
+                </div>
+              {% endif %}
+          {% endif %}
+          
+          {% unless product.type == 'Class' or product.type == 'Event' %}
+            {% if product.selected_or_first_available_variant.inventory_quantity <= 5 and product.available and product.price > 0 and product.selected_or_first_available_variant.inventory_quantity > 1 %}
+              <p>We have <strong>{{ product.selected_or_first_available_variant.inventory_quantity }}</strong> left in stock.</p>
+            {% endif %}
+          {% endunless %}
+          
+          {% if product.price == 0 and event != true %}
+          {% else %}
+            <div class="row bot10">
+              <div id="min" class="qty">-</div><input type="number" id="quantity" name="quantity" value="1" min="1" class="qty-num" style="border:none"><div id="add" class="qty">+</div>
+            </div>
+          {% endif %}
+          {% comment %}
+            <div class="row bot25">
+              {% include 'paywith' %}
+            </div>
+          {% endcomment %}
+
+          <div id="product-variants" class="row bot25 {% if product.variants.size == 1 %}hide{% endif %}">
+            <select id="product-select" name="id" class="msg msg-select w-input">
+              {% for variant in product.variants %}
+                <option{% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+          {% if product.type == 'Class' or product.type == 'Event' %}
+              <div class="row bot25">
+                  {% include 'booking-form' %}
+              </div>
+          {% endif %}
+            
+          {% if product.price != 0 %}
+              <div class="row-btns bot25">
+                <input type="submit" class="btn btn-buy row w-button" value="Add to Cart">
+    			{% assign currentvariant = product.selected_or_first_available_variant.id %}
+                <a href="/cart/{{ currentvariant }}:1" class="buynowbtn btn btn-buy btn-now w-button">Buy It Now</a>
+              </div>
+          {% else %}
+              {% if event != true %}
+                <a href="/pages/locations-hours" class="btn btn-buy row w-button">Call us to Purchase</a>
+              {% endif %}
+          {% endif %}
+          <div class="item-rtb w-richtext"><p itemprop="description">{{ product.description }}</p></div>
+          {% if collection.image %}
+            <img src="{{ collection.image | img_url: '150x' }}" style="display:inline-block; margin-top: 25px;">
+          {% endif %}
+        </div>
+
+        {% if product.price != 0 %}      
+          <div class="botadd addoff">
+             <input id="addnow" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+            <input type="submit" class="btn btn-buy row w-button" value="Add to Cart">
+    		{% assign currentvariant = product.selected_or_first_available_variant.id %}
+            <a href="/cart/{{ currentvariant }}:1" class="buynowbtn btn btn-buy btn-now w-button">Buy It Now</a>
+          </div>
+        {% endif %}
+      </div>
+    {% endform %}
+  </div>
+</div>
+
+{% include 'related' %}
+{% include 'sect-cta' %}
+
+<script>
+  
+var selectCallback = function(variant, selector) {
+
+  if (variant) {
+    
+    $('.buynowbtn').attr('href','/cart/' + variant.id + ':1');
+    
+    // Swap image.
+    if (variant.featured_image) {
+      var newImage = variant.featured_image; // New image object.
+      var mainImageDomEl = jQuery('#lbimg img')[0]; // DOM element of main image we need to swap.
+      Shopify.Image.switchImage(newImage, mainImageDomEl, switchImage); // Define switchImage (the callback) in your theme's JavaScript file.
+    }
+    
+    // Selected a valid variant that is available.
+    if (variant.available) {
+      
+      // Enabling add to cart button.
+      jQuery('#add').removeClass('disabled').prop('disabled', false).val({{ add_to_cart | json }});
+    
+      // If item is backordered yet can still be ordered, we'll show special message.
+      if (variant.inventory_management && variant.inventory_quantity <= 0) {
+        jQuery('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+        jQuery('#backorder').removeClass("hidden");
+      } else {
+        jQuery('#backorder').addClass("hidden");
+      }
+      
+    } else {
+      // Variant is sold out.
+      jQuery('#backorder').addClass('hidden');
+      jQuery('#add').val({{ sold_out | json }}).addClass('disabled').prop('disabled', true);       
+    }
+    
+    // Whether the variant is in stock or not, we can update the price and compare at price.
+    if ( variant.compare_at_price > variant.price ) {
+      jQuery('#product-price').html('<span class="product-price on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+    } else {
+      jQuery('#product-price').html('<span class="product-price">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+    }        
+
+  } else {
+    // variant doesn't exist.
+    jQuery('#product-price').empty();
+    jQuery('#backorder').addClass('hidden');
+    jQuery('#add').val({{ unavailable | json }}).addClass('disabled').prop('disabled', true);
+  }
+
+};
+  
+jQuery(function($) {
+
+  new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: true });
+  
+  // Add label if only one product option and it isn't 'Title'.
+  {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+  {% endif %}
+
+});
+
+Shopify.Image.preload({{ product.images | json }}, 'grande');
+Shopify.Image.preload({{ product.images | json }}, '1024x1024');
+
+</script>

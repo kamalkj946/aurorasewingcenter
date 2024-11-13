@@ -1,0 +1,150 @@
+{% schema %}
+  {
+    "name": "Testimonials",
+    "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+		{
+          "type": "textarea",
+          "id": "rev1",
+          "label": "Review 1"
+        },
+        {
+          "type": "text",
+          "id": "rev1name",
+          "label": "Review 1 Name"
+        },
+		{
+          "type": "textarea",
+          "id": "rev2",
+          "label": "Review 2"
+        },
+        {
+          "type": "text",
+          "id": "rev2name",
+          "label": "Review 2 Name"
+        },
+		{
+          "type": "textarea",
+          "id": "rev3",
+          "label": "Review 3"
+        },
+        {
+          "type": "text",
+          "id": "rev3name",
+          "label": "Review 3 Name"
+        },
+		{
+          "type": "textarea",
+          "id": "rev4",
+          "label": "Review 4"
+        },
+        {
+          "type": "text",
+          "id": "rev4name",
+          "label": "Review 4 Name"
+        },
+		{
+          "type": "textarea",
+          "id": "rev5",
+          "label": "Review 5"
+        },
+        {
+          "type": "text",
+          "id": "rev5name",
+          "label": "Review 5 Name"
+        },
+		{
+          "type": "textarea",
+          "id": "rev6",
+          "label": "Review 6"
+        },
+        {
+          "type": "text",
+          "id": "rev6name",
+          "label": "Review 6 Name"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+<div class="sect sect-test wf-section">
+    <div class="ctr bot50 w-container"><h2>{{ section.settings.heading }}</h2></div>
+    <div class="wide w-container">
+        <div
+            data-delay="4000"
+            data-animation="slide"
+            class="slider-test w-slider"
+            data-autoplay="false"
+            data-easing="ease"
+            data-ix="scrollfade"
+            data-hide-arrows="false"
+            data-disable-swipe="false"
+            data-autoplay-limit="0"
+            data-nav-spacing="3"
+            data-duration="500"
+            data-infinite="true"
+            role="region"
+            aria-label="carousel"
+            style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 1200ms ease 0s, transform 1600ms ease 0s;"
+        >
+            <div class="mask w-slider-mask" id="w-slider-mask-3">
+                <div class="slide w-slide" aria-label="1 of 2" role="group" style="transform: translateX(0px); opacity: 1;">
+                    <div class="w-row">
+                        <div class="col-tst w-col w-col-4">
+                            <img src="{{ 'quote.png' | asset_img_url : '50x' }}" loading="lazy" alt="" class="ico-quote" width="30" height="30" />
+                            <p>{{ section.settings.rev1 }}</p>
+                            <div class="line2 align-r">- {{ section.settings.rev1name }}</div>
+                        </div>
+                        <div class="col-tst w-col w-col-4">
+                            <img src="{{ 'quote.png' | asset_img_url : '50x' }}" loading="lazy" alt="" class="ico-quote" width="30" height="30" />
+                            <p>{{ section.settings.rev2 }}</p>
+                            <div class="line2 align-r">- {{ section.settings.rev2name }}</div>
+                        </div>
+                        <div class="col-tst w-col w-col-4">
+                            <img src="{{ 'quote.png' | asset_img_url : '50x' }}" loading="lazy" alt="" class="ico-quote" width="30" height="30" />
+                            <p>{{ section.settings.rev3 }}</p>
+                            <div class="line2 align-r">- {{ section.settings.rev3name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide w-slide" aria-label="2 of 2" role="group">
+                    <div class="w-row">
+                        <div class="col-tst w-col w-col-4">
+                            <img src="{{ 'quote.png' | asset_img_url : '50x' }}" loading="lazy" alt="" class="ico-quote" width="30" height="30" />
+                            <p>{{ section.settings.rev4 }}</p>
+                            <div class="line2 align-r">- {{ section.settings.rev4name }}</div>
+                        </div>
+                        <div class="col-tst w-col w-col-4">
+                            <img src="{{ 'quote.png' | asset_img_url : '50x' }}" loading="lazy" alt="" class="ico-quote" width="30" height="30" />
+                            <p>{{ section.settings.rev5 }}</p>
+                            <div class="line2 align-r">- {{ section.settings.rev5name }}</div>
+                        </div>
+                        <div class="col-tst w-col w-col-4">
+                            <img src="{{ 'quote.png' | asset_img_url : '50x' }}" loading="lazy" alt="" class="ico-quote" width="30" height="30" />
+                            <p>{{ section.settings.rev6 }}</p>
+                            <div class="line2 align-r">- {{ section.settings.rev6name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div aria-live="off" aria-atomic="true" class="w-slider-aria-label" data-wf-ignore=""></div>
+            </div>
+            <div class="hide aro-tst w-slider-arrow-left" role="button" tabindex="0" aria-controls="w-slider-mask-3" aria-label="previous slide"><div class="w-icon-slider-left"></div></div>
+            <div class="hide aro-tst w-slider-arrow-right" role="button" tabindex="0" aria-controls="w-slider-mask-3" aria-label="next slide"><div class="w-icon-slider-right"></div></div>
+            <div class="slide-nav w-slider-nav w-slider-nav-invert">
+                <div class="w-slider-dot w-active" data-wf-ignore="" aria-label="Show slide 1 of 2" aria-pressed="true" role="button" tabindex="0" style="margin-left: 3px; margin-right: 3px;"></div>
+                <div class="w-slider-dot" data-wf-ignore="" aria-label="Show slide 2 of 2" aria-pressed="false" role="button" tabindex="-1" style="margin-left: 3px; margin-right: 3px;"></div>
+            </div>
+        </div>
+    </div>
+</div>

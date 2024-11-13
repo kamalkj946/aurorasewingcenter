@@ -1,0 +1,52 @@
+{% schema %}
+  {
+  "name": "Promo Cards",
+  "tag": "section",
+  "blocks": [
+     {
+       "name": "Card",
+       "type": "slide",
+       "settings": [
+         {
+            "type": "image_picker",
+            "id": "img",
+            "label": "Logo"
+         }, {
+           "type": "text",
+           "id": "heading",
+           "label": "Heading"
+         }, {
+           "type": "text",
+           "id": "button",
+           "label": "Button Text"
+         }, {
+            "type": "url",
+            "id": "page",
+            "label": "Button URL"
+         }
+       ]
+     }
+   ]
+}
+{% endschema %}
+
+<div class="sect">
+  <div class="wide w-container">
+  <h2 class="ctr bot50">Explore Exclusive Coupons & Specials by clicking on the buttons or logo below!</h2>
+  <ul class="ul-cc">
+    {% for block in section.blocks %}
+      <li class="li-deal">
+      <a href="{{ block.settings.page }}" class="go-cc go-deal">
+        {% if block.settings.img %}
+          <img class="logo-deal" src="{{ block.settings.img | img_url: '3400x' }}">
+        {% else %}
+          <h3 class="h3-card">{{ block.settings.heading }}</h3>
+        {% endif %}
+        <p class="p-hero"><strong>{{ block.settings.paragraph }}</strong></p>
+        <div class="btn">{{ block.settings.button }}</div>
+      </a>
+      </li>
+    {% endfor %}
+  </ul>
+  </div>
+</div>

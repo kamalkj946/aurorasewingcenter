@@ -1,0 +1,49 @@
+{% schema %}
+  {
+  "name": "Coupons",
+  "tag": "section",
+  "blocks": [
+     {
+       "name": "Coupon",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "text",
+           "id": "heading",
+           "label": "Coupon Code"
+         }, {
+           "type": "text",
+           "id": "linetext",
+           "label": "Line of Text"
+         }, {
+           "type": "text",
+           "id": "button",
+           "label": "Button Text"
+         }, {
+            "type": "url",
+            "id": "page",
+            "label": "Button URL"
+         }
+       ]
+     }
+   ]
+}
+{% endschema %}
+
+<div class="sect">
+  <div class="wide w-container">
+  <h2 class="ctr bot50">Coupon Codes</h2>
+  <ul class="ul-cc">
+    {% for block in section.blocks %}
+      <li class="li-cc">
+      <a href="{{ block.settings.page }}?discount={{ block.settings.heading }}" class="go-cc">
+        <div>Use code at checkout:</div>
+        <h3 class="h3-card">{{ block.settings.heading }}</h3>
+        <p class="bot25">{{ block.settings.linetext }}</p>
+        <div class="btn">{{ block.settings.button }}</div>
+      </a>
+      </li>
+    {% endfor %}
+  </ul>
+  </div>
+</div>

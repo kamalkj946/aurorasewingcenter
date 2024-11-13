@@ -1,0 +1,55 @@
+{% schema %}
+  {
+    "name": "CTA Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "text"
+      },
+      {
+        "type": "textarea",
+        "id": "paragraph",
+        "label": "Paragraph Text"
+      },
+      {
+        "type": "text",
+        "id": "btntxt",
+        "label": "Button Text",
+        "default": "text"
+      },
+      {
+        "type": "url",
+        "id": "btnlink",
+        "label": "Button Link"
+      }
+	]
+  }
+{% endschema %}
+
+<div class="sect sect-join wf-section">
+    <div class="flex-tall w-row">
+      <div class="col-join1 w-col w-col-6">
+        <div class="div-block-2">
+          <h2>{{ section.settings.heading }}</h2>
+          <p class="bot25">{{ section.settings.paragraph }}</p>
+          <div class="row">
+            <a href="{{ section.settings.btnlink }}" class="btn btn-f w-button">{{ section.settings.btntxt }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-join2 w-col w-col-6">
+        <div class="row">
+          <div class="klaviyo-form-R6cQJs" style="margin:auto"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% comment %}
+<!-- Begin Constant Contact Active Forms -->
+<script> var _ctct_m = "5eff8964957c3562ca1855d063d63737"; </script>
+<script id="signupScript" src="//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js" async defer></script>
+<!-- End Constant Contact Active Forms -->
+{% endcomment %}

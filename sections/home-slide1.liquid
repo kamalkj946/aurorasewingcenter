@@ -1,0 +1,57 @@
+{% schema %}
+  {
+    "name": "Top Block",
+    "settings": [
+    {
+      "type": "text",
+      "id": "topheading",
+      "label": "Heading",
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "btn1txt",
+      "label": "Button 1 Text",
+      "default": "text"
+    },
+    {
+      "type": "url",
+      "id": "btnlink1",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "btn2txt",
+      "label": "Button 2 Text",
+      "default": "text"
+    },
+
+	{
+      "type": "url",
+      "id": "btnlink2",
+      "label": "Button 2 Link"
+    },
+    {
+      "type": "text",
+      "id": "btn3txt",
+      "label": "Button 3 Text",
+      "default": "text"
+    },
+
+	{
+      "type": "url",
+      "id": "btnlink3",
+      "label": "Button 3 Link"
+    }
+  ]
+  }
+{% endschema %}
+
+<div class="hero-main">
+  <h1 class="h1-hero"><span class="welc">Welcome to</span><br>Aurora <span class="block-xs">Sewing Center</h1>
+  <div class="row">
+    <a href="{{ section.settings.btnlink1 }}" class="btn btn-3 w-button">{{ section.settings.btn1txt }}</a>
+    <a href="{{ section.settings.btnlink2 }}" class="btn btn-3 w-button">{{ section.settings.btn2txt }}</a>
+    <a href="{{ section.settings.btnlink3 }}" class="btn btn-3 w-button">{{ section.settings.btn3txt }}</a>
+  </div>
+</div>

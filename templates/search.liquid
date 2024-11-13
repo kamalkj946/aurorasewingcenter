@@ -1,0 +1,108 @@
+<style>
+  
+  h3 a {
+  	color: #1ea0b4;
+  }
+  ul li {
+    list-style-type: none;
+  }
+  .pagin .prev a,
+  .pagin .next a {
+  	color: #1ea0b4;
+  }
+  .pagin .prev,
+  .pagin .next,
+  .pagin .page a,
+  .pagin .page.current {
+    width: 46px !important;
+  	padding: 15px;
+    background: #eee;
+    color: #111;
+    text-decoration: none;
+  }
+  
+  .pagin .page.current {
+  	background-color: transparent;
+  }
+  
+  }
+  .pagin .prev a,
+  .pagin .next a {
+  	color: #111 !important;
+  }
+  
+</style>
+
+{% comment %}
+The search.liquid template is not a required template.
+That search.liquid template is included in the current theme to make it easier for you 
+to customize your /search page.
+Whether you are using your own template for the search page or not,
+the {{ content_for_header }} tag in theme.liquid will always output the following on the /search page:
+<link rel="stylesheet" href="//cdn.shopify.com/s/global/search.css" type="text/css" />
+So the /search page is always styled by a globally-hosted stylesheet called search.css.
+You may override and complement that CSS in your theme's stylesheet.
+We are using a div#searchresults below so that the styles defined in search.css get
+applied to the elements on this page; the 'searchresults' id is used in the CSS
+selectors inside search.css.
+{% endcomment %}
+
+<div class="head" style="padding-bottom:50px; background-color:#c7e599">
+    <div class="row">
+      <div class="w-container">
+        <form action="/search" method="get" role="search" class="form w-form">
+          <div id="email-form" name="email-form" class="form-find" aria-label="Email Form">
+            <div class="row">
+              <input type="search" class="msg msg-src w-input" name="q" placeholder="Search Store" id="" required="" /></div>
+            <div>
+            <input type="submit" value="Search" data-wait="Please wait..." class="btn btn-find w-button" /></div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<div class="sect">
+  <div class="w-container">
+    {% if search.performed %}
+
+      {% paginate search.results by 10 %}
+
+        {% comment %}
+        Common pitfall to avoid: search.results should never be accessed before the opening 
+        paginate tag. Move the opening and closing paginate tags to the very top and bottom of your
+        search.liquid template if you need to.
+        If you fail to do the above, the pagination of search results will be broken.
+        search.results_count is fine to access in or out of the paginate block.
+        {% endcomment %}
+
+        {% if search.results_count == 0 %}  
+          Your search for "{{ search.terms }}" did not yield any results.          
+        {% else %}
+          <ul class="ul-search">
+            {% for item in search.results %}      
+              <li class="bot25">
+                {% if item.vendor %}
+                  <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                    {{ item | img_url: '200x' | img_tag: item.featured_image.alt }}
+                  </a>
+                {% endif %}
+                <h3>{{ item.title | link_to: item.url }}</h3>
+                {{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}   
+              </li>
+	          <div style="width:100%;height:1px;background-color:#eee;margin-bottom:40px;"></div>
+            {% endfor %}
+          </ul>
+        {% endif %}    
+
+    	<div class="pagin row ctr">
+        {% if paginate.pages > 1 %}
+          {{ paginate | default_pagination }}
+        {% endif %}
+		</div>
+
+      {% endpaginate %}    
+
+    {% endif %}  
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<li class="li-item">
+  <form action="/cart/add" method="post" enctype="multipart/form-data" class="item">
+        
+    <a href="{{ product.url }}" class="item-go w-inline-block">
+      
+      {% for tag in product.tags %}        
+        {% if tag contains 'Sale-5'
+           or tag contains 'Sale-10'
+           or tag contains 'Sale-15'
+           or tag contains 'Sale-20'
+           or tag contains 'Sale-25'
+           or tag contains 'Sale-30'
+           or tag contains 'Sale-35'
+           or tag contains 'Sale-40'
+           or tag contains 'Sale-45'
+           or tag contains 'Sale-50'
+           or tag contains 'Sale-55'
+           or tag contains 'Sale-60'
+           or tag contains 'Sale-65'
+           or tag contains 'Sale-70'
+           or tag contains 'Sale-75'
+        %}
+          {% assign salenum = tag | remove: "Sale-" %}
+          <div class="saletag">Save {{ salenum }}%</div>
+        {% else %}        
+          {% if discount_allocation.amount == true or product.tags contains 'sale' or product.compare_at_price > product.price %}
+            <div class="saletag">sale</div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      
+      <div class="itembox">{{ discount_application.type }}
+	      <img src="{{ product | img_url: '300x' }}" alt="{{ variant.title }}" class="img-item" loading="lazy">
+      </div>
+      
+      <h3 class="h3-item">{{ product.title }}</h3>
+      {% unless product.price == 0 %}
+      	<div class="prices">{{ product.price | money }}<span class="strike">{{ product.compare_at_price | money }}</span></div>
+      {% endunless %}
+    </a>
+    
+    {% for collection in product.collections %}
+      {% if collection.handle contains "event" %}
+      	{% assign event = true %}
+      {% else %}
+      	{% assign event = false %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if event == true %}
+    	<div class="row bot10">
+          <a href="{{ product.url }}" class="btn w-button">Register Now</a>
+	    </div>
+    {% else %}
+        <div class="row bot10">
+          {% if product.price != 0 %}
+              {% if product.options.size > 1 %}
+                <a href="#" class="btn buyadd w-button">Buy Now</a>
+              {% else %}
+                <input class="btn w-button" value="Buy Now" type="submit">
+              {% endif %}
+          {% else %}     
+              {% if event == true %}
+                  <a href="{{ product.url }}" class="btn w-button">Register Now</a>
+              {% else %}
+                  <a href="/pages/locations-hours" class="btn w-button">Call to Purchase</a>
+              {% endif %}
+          {% endif %}
+        </div>
+    {% endif %}
+    
+    <div class="row">
+      <a href="{{ product.url }}" class="btn btn-link darklink btn-more w-button">View More</a>
+    </div>
+    
+    <div class="item-buy">
+      <h3>Variant</h3>
+       <select id="product-select" name="id" class="msg w-input">
+            {% for variant in product.variants %}
+            <option{% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
+              {{ variant.title }} - {{ variant.price | money }}
+            </option>
+            {% endfor %}
+          </select>
+      <input class="btn buyadd w-button" value="Buy Now" type="submit">
+    </div>
+  </form>
+</li>

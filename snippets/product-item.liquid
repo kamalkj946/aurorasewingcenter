@@ -1,0 +1,29 @@
+{% comment %}Is this product on sale?{% endcomment %}
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+<div class="item">
+  <div class="item-contain w-container">
+    <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" class="item-spot">
+
+    <div class="row" data-ix="scroll-up-away">
+        
+	  {% include 'item-logos' %}
+      
+      <div class="item-col">
+        {% if product.price_varies %}From{% endif %}
+      		<p class="item-price" style="margin-top: 7px">{{ product.price | money }}</p>
+        {% if on_sale %}
+      		<p class="item-price" style="margin-top: 7px">{{ product.compare_at_price | money }}</p>
+        {% endif %}
+        <p>{{ product.description }}</p>  
+      </div>
+      
+      <a href="{{ product.url | within: collection }}" class="btn w-button">View More</a>
+  	  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      
+    </div>
+  </div>
+</div>

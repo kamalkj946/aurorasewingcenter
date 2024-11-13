@@ -1,0 +1,105 @@
+{% schema %}
+  {
+    "name": "Topbar",
+    "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_checkbox",
+      "label": "Enable?"
+    },
+    {
+      "type": "text",
+      "id": "topbar",
+      "label": "Heading",
+      "default": "text"
+    },
+    {
+      "type": "text",
+      "id": "textsize",
+      "label": "Font Size",
+      "default": "15"
+    },
+	{
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Background Color",
+      "default": "#D6618D"
+	},
+	{
+      "type": "color",
+      "id": "txtcolor",
+      "label": "Font Color",
+      "default": "#ffffff"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+{% if section.settings.enable_checkbox %}
+	<div class="topbar" style="font-weight: bold; font-size:{{ section.settings.textsize }}px; background-color:{{ section.settings.bgcolor }}; color: {{ section.settings.txtcolor }}">
+
+      <div class="marquee">
+        <p class="p-marq">{{ section.settings.topbar }}</p>
+        <p class="p-marq p-marq2">{{ section.settings.topbar }}</p>
+      </div>
+  
+      <div class="topex"></div>
+	</div>
+{% endif %}
+
+<style style="text/css">
+
+@media screen and (max-width:479px) {
+
+        .marquee {
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            -moz-transform: translateX(50%);
+            -webkit-transform: translateX(50%);
+            transform: translateX(50%);
+            -moz-animation: scroll-left 2s linear infinite;
+            -webkit-animation: scroll-left 2s linear infinite;
+            animation: scroll-left 10s linear infinite;
+        }
+        
+        @-moz-keyframes scroll-left {
+            0% {
+                -moz-transform: translateX(0%);
+            }
+            100% {
+                -moz-transform: translateX(-50%);
+            }
+        }
+        
+        @-webkit-keyframes scroll-left {
+            0% {
+                -webkit-transform: translateX(0%);
+            }
+            100% {
+                -webkit-transform: translateX(-50%);
+            }
+        }
+        
+        @keyframes scroll-left {
+            0% {
+                -moz-transform: translateX(0%);
+                -webkit-transform: translateX(0%);
+                transform: translateX(0%);
+            }
+            100% {
+                -moz-transform: translateX(-50%);
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+            }
+        }
+        
+  }
+        
+</style>

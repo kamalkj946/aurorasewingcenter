@@ -1,0 +1,44 @@
+<style>
+  
+  ul-collec {
+    list-style-type: none;    
+  }
+  ul-collec li {
+  	display: block;
+  }
+  ul-collec li a {
+  	color: #0d0e30;
+  }
+  
+  
+</style>
+
+<div class="header">
+  <div class="wide w-container">
+	<h1 data-ix="loadfade">Shop Aurora Sewing Center</h1>
+  </div>
+</div>
+
+<div id="collections-listing" class="sect" style="padding-top:40px;">
+  <div class="wide w-container">
+  {% paginate collections by 200 %}
+    {% if collections.size > 0 %}
+    <ul class="ul-cllc">
+      {% for collection in collections %}
+        {% if collection.all_products_count >= 1 %}
+          <li class="li-item li-feats">
+            <a href="{{ collection.url }}" class="cllc-go w-inline-block">
+              <div class="padded"><h3 class="h3-item">{{ collection.title }} ({{ collection.all_products_count }})</h3></div>
+              <div class="row"><div class="btn btn-link darklink btn-more">Shop Now</div></div>
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div id="pagination">{{ paginate | default_pagination }}</div>
+    {% else %}
+      <p>No Collections found...</p>
+    {% endif %}
+  {% endpaginate %}
+</div>
+</div>
